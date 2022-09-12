@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="18122" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="appleTV" appearance="light"/>
+    <dependencies>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="subscriptionCell" id="mi0-fp-MKr" customClass="SubscriptionListCell" customModule="Justwatchme_tv" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="1880" height="124"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="1880" height="124"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TM5-2a-qaL">
+                        <rect key="frame" x="4" y="16" width="1872" height="0.0"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vya-HL-qv3">
+                        <rect key="frame" x="940" y="24" width="0.0" height="0.0"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="fL4-Qv-gP8"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="TM5-2a-qaL" secondAttribute="trailing" constant="4" id="3Gf-Jr-zZN"/>
+                <constraint firstItem="vya-HL-qv3" firstAttribute="top" secondItem="TM5-2a-qaL" secondAttribute="bottom" constant="8" id="9Rf-9Z-vAH"/>
+                <constraint firstItem="TM5-2a-qaL" firstAttribute="top" secondItem="mi0-fp-MKr" secondAttribute="top" constant="16" id="Xui-q1-6Hf"/>
+                <constraint firstItem="vya-HL-qv3" firstAttribute="centerX" secondItem="TM5-2a-qaL" secondAttribute="centerX" id="vcL-TC-A6o"/>
+                <constraint firstItem="TM5-2a-qaL" firstAttribute="leading" secondItem="mi0-fp-MKr" secondAttribute="leading" constant="4" id="zzg-1w-JAO"/>
+            </constraints>
+            <size key="customSize" width="1880" height="124"/>
+            <connections>
+                <outlet property="priceLabel" destination="vya-HL-qv3" id="eKX-Te-DZn"/>
+                <outlet property="subscriptionNameLabel" destination="TM5-2a-qaL" id="Rrg-RK-Mqq"/>
+            </connections>
+            <point key="canvasLocation" x="-93" y="294"/>
+        </collectionViewCell>
+    </objects>
+</document>

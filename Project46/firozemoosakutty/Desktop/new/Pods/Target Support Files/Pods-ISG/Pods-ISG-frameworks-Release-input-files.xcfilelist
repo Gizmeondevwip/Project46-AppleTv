@@ -1,0 +1,11 @@
+${PODS_ROOT}/Target Support Files/Pods-ISG/Pods-ISG-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
+${BUILT_PRODUCTS_DIR}/BrightFutures/BrightFutures.framework
+${PODS_ROOT}/GoogleAds-IMA-tvOS-SDK/GoogleInteractiveMediaAds.framework
+${BUILT_PRODUCTS_DIR}/ModelMapper/Mapper.framework
+${BUILT_PRODUCTS_DIR}/ParallaxView/ParallaxView.framework
+${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework
+${BUILT_PRODUCTS_DIR}/Result/Result.framework
+${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework
+${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework
+${BUILT_PRODUCTS_DIR}/TvOSSlider/TvOSSlider.framework

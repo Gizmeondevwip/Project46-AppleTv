@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="17701" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="appleTV" appearance="light"/>
+    <dependencies>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="showVideosCollectionViewCell" id="Rz2-K0-ksD" customClass="ShowVideosCollectionViewCell" customModule="Justwatchme_tv" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="380" height="124"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="380" height="124"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f6s-Lx-eGC">
+                        <rect key="frame" x="0.0" y="74" width="380" height="0.0"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BES-KF-0Xa">
+                        <rect key="frame" x="0.0" y="0.0" width="380" height="74"/>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-play-48" translatesAutoresizingMaskIntoConstraints="NO" id="F4i-Xr-l22">
+                        <rect key="frame" x="140" y="12" width="100" height="100"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="D4z-3e-soE"/>
+                            <constraint firstAttribute="height" constant="100" id="zg1-VT-dar"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="7PP-Ag-gPX"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="BES-KF-0Xa" secondAttribute="trailing" id="1LL-Iw-abg"/>
+                <constraint firstItem="BES-KF-0Xa" firstAttribute="top" secondItem="Rz2-K0-ksD" secondAttribute="top" id="4kH-LC-OwN"/>
+                <constraint firstItem="BES-KF-0Xa" firstAttribute="bottom" secondItem="f6s-Lx-eGC" secondAttribute="top" id="Art-6S-Hc0"/>
+                <constraint firstItem="BES-KF-0Xa" firstAttribute="bottom" secondItem="f6s-Lx-eGC" secondAttribute="top" id="C2b-iA-vxV"/>
+                <constraint firstItem="f6s-Lx-eGC" firstAttribute="leading" secondItem="Rz2-K0-ksD" secondAttribute="leading" id="Db4-O7-caw"/>
+                <constraint firstAttribute="bottom" secondItem="BES-KF-0Xa" secondAttribute="bottom" constant="50" id="HkB-OT-o8G"/>
+                <constraint firstItem="F4i-Xr-l22" firstAttribute="centerY" secondItem="Rz2-K0-ksD" secondAttribute="centerY" id="J6Z-cV-g0G"/>
+                <constraint firstItem="BES-KF-0Xa" firstAttribute="leading" secondItem="Rz2-K0-ksD" secondAttribute="leading" id="NhM-xL-TKP"/>
+                <constraint firstItem="F4i-Xr-l22" firstAttribute="centerX" secondItem="Rz2-K0-ksD" secondAttribute="centerX" id="O63-Up-Yy3"/>
+                <constraint firstAttribute="trailing" secondItem="f6s-Lx-eGC" secondAttribute="trailing" id="Zln-mj-EfL"/>
+            </constraints>
+            <size key="customSize" width="380" height="124"/>
+            <connections>
+                <outlet property="PlayImageView" destination="F4i-Xr-l22" id="Uin-iw-iXe"/>
+                <outlet property="videoThumbnailImageView" destination="BES-KF-0Xa" id="8de-jt-uqp"/>
+                <outlet property="videoTitle" destination="f6s-Lx-eGC" id="nen-yc-fh6"/>
+            </connections>
+            <point key="canvasLocation" x="304" y="294"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="icons8-play-48" width="48" height="48"/>
+    </resources>
+</document>

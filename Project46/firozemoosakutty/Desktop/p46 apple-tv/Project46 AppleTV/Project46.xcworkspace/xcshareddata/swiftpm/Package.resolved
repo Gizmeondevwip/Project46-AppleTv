@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "simplesubtitles",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/peantunes/SimpleSubtitles.git",
+      "state" : {
+        "revision" : "7c042d95e84304b8fb4593d1397139c8ba233311",
+        "version" : "0.2.0"
+      }
+    }
+  ],
+  "version" : 2
+}

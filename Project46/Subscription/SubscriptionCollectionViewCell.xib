@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="20037" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="appleTV" appearance="light"/>
+    <dependencies>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="subscriptionListCell" id="49G-cC-55n" customClass="SubscriptionCollectionViewCell" customModule="Project46" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="1421" height="473"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="1421" height="473"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JPa-x0-4oW">
+                        <rect key="frame" x="72" y="246.5" width="1341" height="0.0"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JQz-qH-nee">
+                        <rect key="frame" x="72" y="262.5" width="1341" height="0.0"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="DbY-Ik-4CR"/>
+            <constraints>
+                <constraint firstItem="JQz-qH-nee" firstAttribute="top" secondItem="JPa-x0-4oW" secondAttribute="bottom" constant="16" id="1l4-vJ-XGP"/>
+                <constraint firstItem="JQz-qH-nee" firstAttribute="leading" secondItem="JPa-x0-4oW" secondAttribute="leading" id="9jm-WP-CZ8"/>
+                <constraint firstItem="DbY-Ik-4CR" firstAttribute="trailing" secondItem="JPa-x0-4oW" secondAttribute="trailing" constant="8" id="IQt-98-PK8"/>
+                <constraint firstItem="JPa-x0-4oW" firstAttribute="centerY" secondItem="DbY-Ik-4CR" secondAttribute="centerY" constant="-20" id="PGi-Ri-mJb"/>
+                <constraint firstItem="JQz-qH-nee" firstAttribute="trailing" secondItem="JPa-x0-4oW" secondAttribute="trailing" id="YgN-ZU-mWq"/>
+                <constraint firstItem="DbY-Ik-4CR" firstAttribute="leading" secondItem="JPa-x0-4oW" secondAttribute="leading" constant="8" id="o9J-Ew-npK"/>
+            </constraints>
+            <size key="customSize" width="1421" height="473"/>
+            <connections>
+                <outlet property="priceLabel" destination="JQz-qH-nee" id="nsW-Zw-JRH"/>
+                <outlet property="subscriptionNameLabel" destination="JPa-x0-4oW" id="Idb-UZ-tVg"/>
+            </connections>
+            <point key="canvasLocation" x="317" y="8"/>
+        </collectionViewCell>
+    </objects>
+</document>

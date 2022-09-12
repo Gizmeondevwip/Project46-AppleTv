@@ -1,0 +1,18 @@
+{
+  "images" : [
+    {
+      "filename" : "Runway 400_240.png",
+      "idiom" : "tv",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Runway 800_240.png",
+      "idiom" : "tv",
+      "scale" : "2x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

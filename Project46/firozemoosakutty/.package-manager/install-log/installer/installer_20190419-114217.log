@@ -1,0 +1,101 @@
+11:42:23 [TRACE] [Log                   (  66)] - Installer logging start
+11:42:23 [TRACE] [Log                   (  66)] - Installer logging start
+**********************  Installer UI mode start  **********************
+
+OS Name            : Mac OS X
+OS Version         : 10.14.4
+Data Model         : 64
+java runtime name  : Java(TM) SE Runtime Environment
+java vm name       : Java HotSpot(TM) 64-Bit Server VM
+java vm version    : 12.0.1+12
+java spec. version : 12
+java version       : 12.0.1
+
+Directory of running Installer : /Volumes/Tizen_Studio_3.2/installer.app/Contents/Resources/Java
+11:42:23 [TRACE] [WizardUIMain          (  83)] - Initializing start.
+11:42:23 [TRACE] [Initializer           ( 118)] - There is no command.
+11:42:23 [TRACE] [Initializer           ( 119)] - Set run command to RUN_INSTALL
+11:42:23 [TRACE] [WizardUIMain          (  92)] - Initializing MAC Application...
+11:42:24 [TRACE] [UiInitializeUtil      (  97)] - Checking java
+11:42:24 [TRACE] [UiInitializeUtil      ( 104)] - Current java is working java version - not java 1.8
+11:42:24 [INFO ] [WizardUIMain          ( 222)] - Installer init start
+11:42:24 [TRACE] [InstallController     (  97)] - org.tizen.installer.core.InstallController constructor start.
+11:42:24 [TRACE] [InstallController     ( 421)] - checkPrerequisites() start
+11:42:24 [TRACE] [InstallController     ( 434)] - Checking java
+11:42:24 [TRACE] [InstallController     ( 461)] - Current java is working java version - not java 1.8
+11:42:24 [TRACE] [InstallController     ( 423)] - Return from checkingJava() => true
+11:42:24 [TRACE] [InstallController     ( 430)] - checkPrerequisites() end
+11:42:24 [TRACE] [InstallController     ( 402)] - init zip library start.
+11:42:25 [TRACE] [ZipMultiLibrary       (  85)] - ZipLibrary load completed
+11:42:25 [TRACE] [InstallController     ( 412)] - init zip library end.
+11:42:25 [TRACE] [InstallController     ( 327)] - checkAndSetDirectory start
+11:42:25 [TRACE] [InstallController     ( 353)] - Verify install directory start
+11:42:25 [TRACE] [InstallController     ( 355)] - 	Install target is valid. => /Users/firozemoosakutty/tizen-studio
+11:42:25 [TRACE] [InstallController     ( 359)] - 	Install target is not valid. => /Users/firozemoosakutty/tizen-studio
+11:42:25 [TRACE] [InstallController     ( 390)] - Verify install directory end
+11:42:25 [TRACE] [InstallController     ( 395)] - 	SDK installation directory : /Users/firozemoosakutty/tizen-studio
+11:42:25 [TRACE] [InstallController     ( 396)] - 	SDK data directory : /Users/firozemoosakutty/tizen-studio-data.1
+11:42:25 [TRACE] [InstallController     ( 398)] - checkAndSetDirectory end
+11:42:25 [TRACE] [InstallController     ( 312)] - checkDiskSpace start
+11:42:25 [TRACE] [InstallController     ( 318)] - 	Disk space is enough.
+11:42:25 [TRACE] [InstallController     ( 320)] - 	Required disk space : 675273982, Remain disk space : 803345289216
+11:42:25 [TRACE] [InstallController     ( 322)] - checkDiskSpace end
+11:42:25 [TRACE] [InstallController     ( 105)] - Total initialize Time : 693
+11:42:25 [TRACE] [InstallController     ( 106)] - org.tizen.installer.core.InstallController constructor end.
+11:42:25 [INFO ] [WizardUIMain          ( 260)] - Installer init end
+11:42:25 [TRACE] [WizardUIMain          ( 102)] - Initializing finished.
+11:42:25 [TRACE] [WizardUIMain          ( 104)] - Start installation.
+11:42:25 [TRACE] [WizardDefaultWindow   (  78)] - org.tizen.installer.ui.wizard.WizardDefaultWindow class is created.
+11:42:25 [TRACE] [WizardDefaultWindow   (  79)] - org.tizen.installer.ui.wizard.WizardDefaultWindow initializing start.
+11:42:25 [TRACE] [WizardDefaultWindow   (  89)] - org.tizen.installer.ui.wizard.WizardDefaultWindow initializing end.
+11:42:25 [TRACE] [WizardUIMain          ( 110)] - before wizardWindow.run()
+11:42:25 [TRACE] [WizardDefaultWindow   (  98)] - WizardDefaultWindow run() start
+11:42:25 [TRACE] [WizardDefaultWindow   ( 118)] - WizardDefaultWindow createContents() start
+11:42:25 [TRACE] [WizardMaster          (  59)] - Page Master constructor is called.
+11:42:25 [TRACE] [WizardCommonPage      ( 101)] - org.tizen.installer.ui.wizard.WizardCommonPage constructor start.
+11:42:25 [TRACE] [FileUtil              ( 123)] - write file from input stream to : /var/folders/_l/h0cjrb2n3r17yr8pkpv1_b680000gn/T/local_1555654345916403668675761735.ttf
+11:42:25 [TRACE] [FileUtil              ( 123)] - write file from input stream to : /var/folders/_l/h0cjrb2n3r17yr8pkpv1_b680000gn/T/local_15556543453334113150958983866.ttf
+11:42:25 [TRACE] [WizardCommonPage      ( 122)] - org.tizen.installer.ui.wizard.WizardCommonPage constructor end.
+11:42:25 [TRACE] [WizardCommonPage      ( 101)] - org.tizen.installer.ui.wizard.WizardCommonPage constructor start.
+11:42:25 [TRACE] [FileUtil              ( 123)] - write file from input stream to : /var/folders/_l/h0cjrb2n3r17yr8pkpv1_b680000gn/T/local_1555654345981315517088909825.ttf
+11:42:25 [TRACE] [FileUtil              ( 123)] - write file from input stream to : /var/folders/_l/h0cjrb2n3r17yr8pkpv1_b680000gn/T/local_155565434517929926395803446655.ttf
+11:42:25 [TRACE] [WizardCommonPage      ( 122)] - org.tizen.installer.ui.wizard.WizardCommonPage constructor end.
+11:42:25 [TRACE] [WizardCommonPage      ( 101)] - org.tizen.installer.ui.wizard.WizardCommonPage constructor start.
+11:42:26 [TRACE] [FileUtil              ( 123)] - write file from input stream to : /var/folders/_l/h0cjrb2n3r17yr8pkpv1_b680000gn/T/local_15556543468877124904421575961.ttf
+11:42:26 [TRACE] [FileUtil              ( 123)] - write file from input stream to : /var/folders/_l/h0cjrb2n3r17yr8pkpv1_b680000gn/T/local_1555654346744592916211958976.ttf
+11:42:26 [TRACE] [WizardCommonPage      ( 122)] - org.tizen.installer.ui.wizard.WizardCommonPage constructor end.
+11:42:26 [TRACE] [WizardCommonPage      ( 101)] - org.tizen.installer.ui.wizard.WizardCommonPage constructor start.
+11:42:26 [TRACE] [FileUtil              ( 123)] - write file from input stream to : /var/folders/_l/h0cjrb2n3r17yr8pkpv1_b680000gn/T/local_15556543468597695029932525918.ttf
+11:42:26 [TRACE] [FileUtil              ( 123)] - write file from input stream to : /var/folders/_l/h0cjrb2n3r17yr8pkpv1_b680000gn/T/local_15556543465619350027435852421.ttf
+11:42:26 [TRACE] [WizardCommonPage      ( 122)] - org.tizen.installer.ui.wizard.WizardCommonPage constructor end.
+11:42:26 [TRACE] [WizardCommonPage      ( 101)] - org.tizen.installer.ui.wizard.WizardCommonPage constructor start.
+11:42:26 [TRACE] [FileUtil              ( 123)] - write file from input stream to : /var/folders/_l/h0cjrb2n3r17yr8pkpv1_b680000gn/T/local_155565434617389203378430387781.ttf
+11:42:26 [TRACE] [FileUtil              ( 123)] - write file from input stream to : /var/folders/_l/h0cjrb2n3r17yr8pkpv1_b680000gn/T/local_15556543463829391739078759804.ttf
+11:42:26 [TRACE] [WizardCommonPage      ( 122)] - org.tizen.installer.ui.wizard.WizardCommonPage constructor end.
+11:42:26 [TRACE] [WizardMaster          (  71)] - Page Master constructor is end.
+11:42:26 [TRACE] [WizardMaster          (  75)] - enablePages start => LICENSE_PAGE
+11:42:26 [TRACE] [WizardMaster          (  96)] - enablePages end => LICENSE_PAGE
+11:42:26 [TRACE] [WizardDefaultWindow   ( 171)] - WizardDefaultWindow createContents() end
+11:42:26 [TRACE] [WizardDefaultWindow   ( 109)] - WizardDefaultWindow run() end
+11:42:26 [TRACE] [WizardLicensePage$3   ( 122)] - LicensePage is called. addPaintListener => PaintEvent{Composite {} time=1717519 data=null gc=GC {org.eclipse.swt.internal.cocoa.NSGraphicsContext{140216974303344}} x=0 y=0 width=680 height=254 count=0}
+11:42:28 [TRACE] [WizardMaster          (  75)] - enablePages start => READY_PAGE
+11:42:28 [TRACE] [WizardMaster          (  96)] - enablePages end => READY_PAGE
+11:42:28 [TRACE] [WizardReadyPage$1     ( 165)] - ReadyPage is called. addPaintListener => PaintEvent{Composite {} time=1721420 data=null gc=GC {org.eclipse.swt.internal.cocoa.NSGraphicsContext{140216974303344}} x=0 y=0 width=680 height=254 count=0}
+11:42:34 [TRACE] [WizardReadyPage$8     ( 991)] - Display message box start.
+11:42:46 [TRACE] [WizardReadyPage$12    (1208)] - MouseEvent{Button {Install} time=1739060 data=null button=1 stateMask=0x0 x=48 y=16 count=1}
+11:42:46 [TRACE] [WizardReadyPage$12    (1163)] - User click install button mouseUp event => MouseEvent{Button {Install} time=1739116 data=null button=1 stateMask=0x80000 x=48 y=16 count=1}
+11:42:46 [TRACE] [WizardReadyPage$3     ( 196)] - FocusEvent{Text {} time=1739116 data=null}
+11:42:57 [TRACE] [WizardReadyPage$3     ( 196)] - FocusEvent{Text {} time=1750502 data=null}
+11:43:13 [TRACE] [WizardReadyPage$3     ( 196)] - FocusEvent{Text {} time=1766068 data=null}
+11:43:16 [TRACE] [WizardReadyPage$2     ( 176)] - FocusEvent{Text {} time=1769079 data=null}
+11:43:34 [TRACE] [WizardReadyPage$11    (1146)] - User click quit button widgetSelected => SelectionEvent{Button {Cancel} time=1787284 data=null item=null detail=0 x=0 y=0 width=0 height=0 stateMask=0x0 text=null doit=true}
+11:43:34 [TRACE] [WizardReadyPage$2     ( 176)] - FocusEvent{Text {} time=1787284 data=null}
+11:43:36 [TRACE] [WizardReadyPage       (1228)] - User select quit.
+11:43:36 [TRACE] [WizardUIMain          ( 126)] - after wizardWindow.run()
+11:43:36 [TRACE] [WizardUIMain          ( 132)] - Finish installation.
+11:43:36 [TRACE] [WizardUIMain          ( 134)] - Installation result : true
+11:43:36 [TRACE] [WizardUIMain          ( 137)] - ************************** Performance result **************************
+11:43:36 [TRACE] [WizardUIMain          ( 138)] - Installer initializing time : 693
+11:43:36 [TRACE] [WizardUIMain          ( 140)] - Installer total unzip time : 0
+11:43:36 [TRACE] [WizardUIMain          ( 142)] - ************************** Performance result **************************
+**********************  Installer is finished.  **********************
