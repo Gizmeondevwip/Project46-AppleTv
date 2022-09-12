@@ -20,7 +20,7 @@ protocol  CommonVideoTableViewCellDelegate:AnyObject {
 
 }
 class CommonTableViewCell: UITableViewCell,UICollectionViewDataSource{
-
+    
     @IBOutlet fileprivate var mainCollectionView: UICollectionView!
     @IBOutlet weak var videoTypeLabel: UILabel!
 
@@ -31,7 +31,7 @@ class CommonTableViewCell: UITableViewCell,UICollectionViewDataSource{
         didSet{
             mainCollectionView.reloadData()
             mainCollectionView.backgroundColor = .clear
-
+            
         }
     }
     override func awakeFromNib() {
@@ -43,20 +43,20 @@ class CommonTableViewCell: UITableViewCell,UICollectionViewDataSource{
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-
+    
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
     }
-
+    
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return videoArray!.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularCollectionViewCell", for: indexPath as IndexPath) as! PopularCollectionViewCell
         cell.backgroundColor = UIColor.black
@@ -78,7 +78,7 @@ class CommonTableViewCell: UITableViewCell,UICollectionViewDataSource{
         if videoArray![indexPath.row].show_name != nil{
             cell.titleText = videoArray![indexPath.row].show_name?.uppercased()
             cell.nameLabel.text = videoArray![indexPath.row].show_name?.uppercased()
-
+            
         }
         else{
             if videoArray![indexPath.row].type == "LIVE" {
@@ -102,11 +102,11 @@ class CommonTableViewCell: UITableViewCell,UICollectionViewDataSource{
             cell.progressView.isHidden = true
 
         }
-
+        
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-
+       
         if let previousIndexPath = context.previouslyFocusedIndexPath ,
            let cell = mainCollectionView.cellForItem(at: previousIndexPath) {
             print("previousIndexPath")
@@ -124,10 +124,10 @@ class CommonTableViewCell: UITableViewCell,UICollectionViewDataSource{
 //            cell.contentView.layer.shadowRadius = 10.0
 //            cell.contentView.layer.shadowOpacity = 0.9
            if videoType == "NewArrivals"{
-
-
+                
+                
                 delegate.didFocusNewArrivals(passModel: videoArray![indexPath.item])
-
+                
             } else {
                 delegate.didFocusDianamicVideos(passModel: videoArray![indexPath.item])
             }
@@ -138,36 +138,36 @@ class CommonTableViewCell: UITableViewCell,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if videoType == "NewArrivals"{
             delegate.didSelectNewArrivals(passModel: videoArray![indexPath.item])
-
+            
         } else {
             delegate.didSelectDianamicVideos(passModel: videoArray![indexPath.item])
         }
     }
-
+    
 }
 
 extension CommonTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 10, left: 20, bottom: 10, right: cellOffset/2)
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return cellOffset/2
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return cellOffset/2
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-
+        
+      
             let width  = UIScreen.main.bounds.width / 5
             let height = width * 9 / 16
             return CGSize(width: width, height: height)
+           
 
-
-
-
+       
+        
     }
 }
 

@@ -17,64 +17,71 @@ class VideoDetailsViewController: UIViewController {
     var AudioLanguage : String!
     var videoRating : String!
     let reachability = try! Reachability()
+    var episodeArray = [VideoModel]()
 
     @IBOutlet weak var DirectorLabel: UILabel!
     @IBOutlet weak var CastLabel: UILabel!
     @IBOutlet weak var ThemeLabel: UILabel!
-
-
+    
+    
     @IBOutlet weak var SubscriptionListView: UICollectionView!{
         didSet{
             SubscriptionListView.backgroundColor = .clear
         }
     }
     @IBOutlet weak var SubscriptionCVHeight: NSLayoutConstraint!
-
+    
     @IBOutlet weak var videoImageHeight: NSLayoutConstraint!
     @IBOutlet weak var videoImageWidth: NSLayoutConstraint!
     @IBOutlet weak var watchListButton: UIButton!{
         didSet{
-          self.watchListButton.layer.cornerRadius = 34
-          self.watchListButton.clipsToBounds = true
-          self.watchListButton.layer.borderWidth = 1
-            self.watchListButton.layer.borderColor = UIColor(white: 1, alpha: 0.5).cgColor
-         self.watchListButton.backgroundColor = UIColor(white: 1, alpha: 0.3)
-            self.watchListButton.titleLabel?.textColor = .black
-            self.watchListButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
+            self.watchListButton.layer.cornerRadius = 34
+            self.watchListButton.clipsToBounds = true
+            self.watchListButton.layer.borderWidth = 1
+              self.watchListButton.layer.borderColor = UIColor(white: 1, alpha: 0.5).cgColor
+              self.watchListButton.backgroundColor = ThemeManager.currentTheme().UIImageColor
+              self.watchListButton.titleLabel?.textColor = .white
+              self.watchListButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 22)
         }
       }
-
+    
+    @IBOutlet weak var blackGradientHeight: NSLayoutConstraint!
     @IBOutlet weak var metaDataLabel: UILabel!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var videoBackgroundImage: UIImageView!
-
-    @IBOutlet weak var videoTitleLabel: UILabel!
-
+    
+    @IBOutlet weak var videoTitleLabel: UILabel!{
+        didSet{
+            self.videoTitleLabel.textColor = .white
+        }
+    }
+    
     @IBOutlet weak var videoDescriptionLabel: UILabel!
-
-  @IBOutlet weak var gradientView: UIView!
-  @IBOutlet weak var mainScrollView: UIScrollView!
-  @IBOutlet weak var mainView: UIView!
-  @IBOutlet weak var mainViewHeight: NSLayoutConstraint!
-  @IBOutlet weak var metaDataView: UIView!
-      @IBOutlet weak var metaDataViewHeight: NSLayoutConstraint!
-      @IBOutlet weak var seasonTableView: UITableView!
-      @IBOutlet weak var seasonTableViewHeight: NSLayoutConstraint!
-
-  @IBOutlet weak var ratingLabel: UILabel!{
-      didSet{
-          ratingLabel.layer.borderWidth = 2.0
-          ratingLabel.layer.borderColor = UIColor.darkGray.cgColor
-          ratingLabel.isHidden = true
-      }
-  }
+    
     @IBOutlet weak var showvideosCollectionView: UICollectionView!{
         didSet {
             // showvideosCollectionView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         }
-
+        
     }
-
+    @IBOutlet weak var mainScrollView: UIScrollView!
+    
+    @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var mainViewHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var metaDataView: UIView!
+    @IBOutlet weak var metaDataViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var seasonTableView: UITableView!
+    @IBOutlet weak var seasonTableViewHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var ratingLabel: UILabel!{
+        didSet{
+            ratingLabel.layer.borderWidth = 2.0
+            ratingLabel.layer.borderColor = UIColor.darkGray.cgColor
+            ratingLabel.isHidden = true
+        }
+    }
+    @IBOutlet weak var gradientView: UIView!
     var fromCategories = Bool()
     var ShowData = [ShowDetailsModel]()
     var metadataItem : VideoModel!
@@ -86,49 +93,47 @@ class VideoDetailsViewController: UIViewController {
     var showVideoList = [VideoModel]()
     var categoryList = [VideoModel]()
     fileprivate let cellOffset: CGFloat = 120
-
+    
     var videoItem: VideoModel?
     var myMutableString = NSMutableAttributedString()
-
-
+    
+    
     var skProducts = [SKProduct]()
     // here we set all in app purchase ids
-    let productIds: Set<String> = ["com.basic.project46.monthly","com.standard.project46.monthly","com.premium.project46.monthly","com.basic.project46.yearly","com.standard.project46.yearly","com.premium.project46.yearly"]
+    let productIds: Set<String> = ["com.ios.chicanohollywood_paperview_nine","com.ios.chicanohollywood_Monthly_Subscription"]
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setCollectionViewFrame()
+        let nib1 =  UINib(nibName: "HomeTableViewCell", bundle: nil)
+        seasonTableView.register(nib1, forCellReuseIdentifier: "HomeTableCell")
+        seasonTableView.delegate = self
+        seasonTableView.dataSource = self
+        seasonTableView.backgroundColor = .clear
+        SubscriptionListView.register(UINib(nibName: "SubscriptionListCollectionView", bundle: nil), forCellWithReuseIdentifier: "subscriptionCell")
+        self.SubscriptionListView.dataSource = self
+        self.SubscriptionListView.delegate = self
+        self.SubscriptionListView.reloadData()
+       
+//        view.backgroundColor = .black
+        seasonTableView.contentInsetAdjustmentBehavior = .never
+        let width = view.frame.width - view.frame.width/3
+       
+        self.videoImageWidth.constant = width
+        self.videoImageHeight.constant = (9*width)/16
 
-      let nib1 =  UINib(nibName: "HomeTableViewCell", bundle: nil)
-              seasonTableView.register(nib1, forCellReuseIdentifier: "HomeTableCell")
-              seasonTableView.delegate = self
-              seasonTableView.dataSource = self
-              seasonTableView.backgroundColor = .clear
-      SubscriptionListView.register(UINib(nibName: "SubscriptionListCollectionView", bundle: nil), forCellWithReuseIdentifier: "subscriptionCell")
-      
-              self.SubscriptionListView.dataSource = self
-              self.SubscriptionListView.delegate = self
-              self.SubscriptionListView.reloadData()
+//        let gradient = CAGradientLayer()
+//
+//        gradient.frame = gradientView.frame
+//
+//        gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+//
+//        gradient.locations = [0.0, 1.0]
+//
+//        gradientView.layer.insertSublayer(gradient, at: 0)
+//
+//        videoBackgroundImage.addSubview(gradientView)
 
-      //        view.backgroundColor = .black
-              seasonTableView.contentInsetAdjustmentBehavior = .never
-              let width = view.frame.width - view.frame.width/3
-
-              self.videoImageWidth.constant = width
-              self.videoImageHeight.constant = (9*width)/16
-
-
-        self.videoImageWidth.constant =  view.frame.width - view.frame.width/3
-        self.videoImageHeight.constant = (view.frame.height/2.3) + 100
-
-        let bgView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-        let gradient = CAGradientLayer()
-        gradient.startPoint = CGPoint(x: 0.32, y: 1.0)
-                   gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
-        gradient.frame = bgView.bounds
-        gradient.colors = [ UIColor.black.cgColor,UIColor.clear
-                                .cgColor,]
-        view.layer.insertSublayer(gradient, at: 0)
-        view.bringSubviewToFront(view)
+//        videoBackgroundImage.bringSubviewToFront(gradientView)
         reachability.whenUnreachable = { _ in
             commonClass.showAlert(viewController:self, messages: "Network connection lost!")
 
@@ -141,7 +146,7 @@ class VideoDetailsViewController: UIViewController {
             print("Unable to start notifier")
         }
         self.getUserSubscription()
-
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -161,7 +166,7 @@ class VideoDetailsViewController: UIViewController {
                     }
                     else{
                         Application.shared.userSubscriptionStatus = true
-
+                        
                     }
                     Application.shared.userSubscriptionsArray = videos
                    //  call function to check subscription after intermediate                                                                  login from guest
@@ -181,7 +186,7 @@ class VideoDetailsViewController: UIViewController {
     }
     func setCollectionViewFrame() {
 //        showvideosCollectionView.register(UINib(nibName: "ShowVideosCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "showVideosCollectionViewCell")
-        SubscriptionListView.register(UINib(nibName: "SubscriptionListCollectionView", bundle: nil), forCellWithReuseIdentifier: "subscriptionCell")
+//
 
     }
     // API call to get subscription packages
@@ -214,7 +219,10 @@ class VideoDetailsViewController: UIViewController {
                         } else {
                             self.VideoSubscriptionArray = videos
                             print("video subscription array",self.VideoSubscriptionArray.count)
-                            let text = self.getProductDetails(productId: self.VideoSubscriptionArray[0].ios_keyword!)
+                            if self.VideoSubscriptionArray[0].ios_keyword != nil{
+                                let text = self.getProductDetails(productId: self.VideoSubscriptionArray[0].ios_keyword!)
+
+                            }
                             self.SubscriptionListView.isHidden = false
 //                            self.playButton.setTitle(text, for: .normal)
                             self.SubscriptionListView.reloadData()
@@ -241,7 +249,7 @@ class VideoDetailsViewController: UIViewController {
                 if responseDictionary["error"] != nil {
                     DispatchQueue.main.async {
                         commonClass.showAlert(viewController:self, messages: "Server error")
-
+                        
                         //   WarningDisplayViewController().noResultview(view : self.view,title: "No Results Found")
                         commonClass.stopActivityIndicator(onViewController: self)
                     }
@@ -261,41 +269,39 @@ class VideoDetailsViewController: UIViewController {
                                 self.showVideoList =  showVideoList
                                 self.categoryListArray = themes
 
-                              if self.ShowData[0].single_video == 1 {
+                                if self.ShowData[0].single_video == 1 {
+                                    
+                                    
+                                    let headerHeight = (Int((self.rowHeight) * 0.2) - 50) * 1
+                                    self.seasonTableViewHeight.constant = (self.rowHeight * CGFloat(self.showVideoList.count)) + CGFloat(headerHeight)
+                                    self.metaDataViewHeight.constant = self.seasonTableViewHeight.constant + self.videoImageHeight.constant
+                                    self.mainViewHeight.constant =  self.metaDataViewHeight.constant
+                                  
+                                    self.didSelectSingleVideos(passModel:self.showVideoList[0])
+                                    self.seasonTableView.reloadData()
 
+                                }
+                                else{
+                                    self.metaDataViewHeight.constant = self.videoImageHeight.constant
 
-                                                                 let headerHeight = (Int((self.rowHeight) * 0.2) - 50) * 1
-                                                                 self.seasonTableViewHeight.constant = (self.rowHeight * CGFloat(self.showVideoList.count)) + CGFloat(headerHeight)
-                                                                 self.metaDataViewHeight.constant = self.seasonTableViewHeight.constant + self.videoImageHeight.constant
-                                                                 self.mainViewHeight.constant =  self.metaDataViewHeight.constant
-
-                                                                 self.didSelectSingleVideos(passModel:self.showVideoList[0])
-                                                                 self.seasonTableView.reloadData()
-
-                                                             }
-                                                             else{
-                                                                 self.metaDataViewHeight.constant = self.videoImageHeight.constant
-
-                                                                 let headerHeight = (Int((self.rowHeight) * 0.2) - 50) * showVideoList.count
-                                                                 self.seasonTableViewHeight.constant = (self.rowHeight * CGFloat(self.showVideoList.count)) + CGFloat(headerHeight)
-                                                                 self.metaDataViewHeight.constant = self.seasonTableViewHeight.constant + self.videoImageHeight.constant
-                                                                 self.mainViewHeight.constant =  self.metaDataViewHeight.constant
-                                                                 self.didSelectShowVideos(passModel:self.showVideoList[0])
-                                                                 self.seasonTableView.reloadData()
-                                                             }
-
-
+                                    let headerHeight = (Int((self.rowHeight) * 0.2) - 50) * showVideoList.count
+                                    self.seasonTableViewHeight.constant = (self.rowHeight * CGFloat(self.showVideoList.count)) + CGFloat(headerHeight)
+                                    self.metaDataViewHeight.constant = self.seasonTableViewHeight.constant + self.videoImageHeight.constant
+                                    self.mainViewHeight.constant =  self.metaDataViewHeight.constant
+                                    self.didSelectShowVideos(passModel:self.showVideoList[0])
+                                    self.seasonTableView.reloadData()
+                                }
                                 self.watchFlag()
-
-                                self.updateUI()
-                                self.didSelectShowVideos(passModel:self.showVideoList[0])
+                                
+                                
+//                                self.updateUI()
                                 // Do any additional setup after loading the view.
 //                                SwiftyStoreKit.retrieveProductsInfo(self.productIds) { (result) in
 //                                    let products = result.retrievedProducts
 //                                    self.skProducts = Array(products)
 //                                    if !Application.shared.userSubscriptionStatus {
 //                                        if self.showVideoList[0].video_id != nil{
-//
+//                                            
 //                                            self.getVideoSubscriptions(video_id:self.showVideoList[0].video_id!) // call function to display prices of selected videos
 //                                        }
 //
@@ -304,13 +310,13 @@ class VideoDetailsViewController: UIViewController {
 //
 //                                }
                             }
-
+                            
                         }
                     }
                 }
             }
         }
-
+        
     }
     func getProductDetails(productId : String) -> String {
         var priceText = ""
@@ -386,22 +392,22 @@ class VideoDetailsViewController: UIViewController {
     //        }
     //    }
     //
-
+    
     #if os(iOS)
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     #endif
-
+    
     private func didPurchased(product: PurchaseDetails?, restore: Bool) {
-
+        
         SwiftyStoreKit.fetchReceipt(forceRefresh: false) { [weak self] result in
             guard let `self` = self else { return }
             switch result {
             case .success(let receiptData):
 //                CustomProgressView.hideActivityIndicator()
                 let encryptedReceipt = receiptData.base64EncodedString()
-
+                
                 self.subscriptionTransaction(status: "success", encryptedReceipt: encryptedReceipt)
                 print("Fetch receipt success")
             case .error(let error):
@@ -420,15 +426,15 @@ class VideoDetailsViewController: UIViewController {
             }
         }
     }
-
+    
     @IBAction func playVideoAction(_ sender: Any) {
         self.purchase(self.VideoSubscriptionArray[0].ios_keyword!, atomically: true);        print("plavideo")
     }
-
-
+    
+    
     @IBAction func watchListAction(_ sender: Any) {
         if UserDefaults.standard.string(forKey: "skiplogin_status") == "true"{
-
+           
             if !watchVideo {
               self.watchVideo = true
               self.watchListShow()
@@ -456,7 +462,7 @@ class VideoDetailsViewController: UIViewController {
 
             }
         }
-
+       
 
     }
     func watchListShow() {
@@ -565,7 +571,7 @@ class VideoDetailsViewController: UIViewController {
             }
         }
     }
-
+    
     //API call to update subscription transaction
     func subscriptionTransaction(status: String,encryptedReceipt: String){
         commonClass.startActivityIndicator(onViewController: self)
@@ -594,10 +600,10 @@ class VideoDetailsViewController: UIViewController {
                     if  status == "success" {
                         print("Your Subscription is processed /n Please wait for some time!")
                         self.subscriptionTransaction(status: status, encryptedReceipt: encryptedReceipt)
-
+                        
                     }
-
-
+                    
+                
                     }
                 }
              else {
@@ -618,208 +624,128 @@ class VideoDetailsViewController: UIViewController {
             }
         }
     }
-
+   
     func updateUI() {
 
 //        self.showvideosCollectionView.dataSource = self
 //        self.showvideosCollectionView.delegate = self
 //        self.showvideosCollectionView.reloadData()
-        self.SubscriptionListView.dataSource = self
-        self.SubscriptionListView.delegate = self
-        self.SubscriptionListView.reloadData()
-
-
+      
+        
     }
     fileprivate let rowHeight = UIScreen.main.bounds.height * 0.3
+    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        if context.nextFocusedView == watchListButton {
+            self.watchListButton.tintColor = ThemeManager.currentTheme().UIImageColor
+            self.watchListButton.backgroundColor =  .gray
+        } else {
+            self.watchListButton.titleLabel?.textColor = .white
+            self.watchListButton.backgroundColor =  ThemeManager.currentTheme().UIImageColor
 
+        }
+    }
 }
-
-extension VideoDetailsViewController: UITableViewDataSource, UITableViewDelegate,UIScrollViewDelegate  {
-
-
-    func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return  showVideoList.count
-
-    }
-
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-
-    }
-
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTableCell", for: indexPath) as! HomeTableViewCell
-        cell.selectionStyle = .none
-        cell.delegate = self
-        cell.backgroundColor = UIColor.clear
-        cell.videoType = "VideoDetails"
-        if ShowData[0].single_video == 1 {
-            cell.videoArray =  self.showVideoList
-        }
-        else{
-            cell.videoArray =  self.showVideoList[indexPath.section].videos
-
-        }
-        return cell
-
-    }
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("hello")
-
-    }
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if ShowData[0].single_video == 1 {
-            return rowHeight
-        }
-        else{
-            if self.showVideoList[indexPath.section].videos!.isEmpty {
-                return 0
-            }
-            return rowHeight
-        }
-    }
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-
-        if ShowData[0].single_video == 1 {
-            return (rowHeight) * 0.2 - 50
-        }
-        else{
-            if self.showVideoList[section].videos!.isEmpty {
-                return 0
-            }
-            return (rowHeight) * 0.2 - 50
-        }
-
-
-
-    }
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        let titleLabel = UILabel()
-        titleLabel.textColor = .white
-        titleLabel.textAlignment = .left
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 30)
-        titleLabel.frame = CGRect(x: 30, y: 0, width: view.bounds.width, height: (rowHeight) * 0.2 - 20).integral
-        if ShowData[0].single_video == 1 {
-        titleLabel.text =  ""
-
-        }
-        else{
-            titleLabel.text =  " Season \(self.showVideoList[section].season!)"
-
-        }
-        headerView.addSubview(titleLabel)
-        headerView.backgroundColor = .clear
-        return headerView
-    }
-
-
-}
-
 
 extension VideoDetailsViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-      return 1
-  }
-
-
-
+   
+    
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        if collectionView == showvideosCollectionView{
-//            if fromCategories {
-//                return self.categoryList.count
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == showvideosCollectionView{
+            if fromCategories {
+                return self.categoryList.count
+            }
+            return showVideoList.count
+        }
+        else{
+            return  self.VideoSubscriptionArray.count
+//            if VideoSubscriptionArray.count > 0{
+//                return  self.VideoSubscriptionArray.count
 //            }
-//            return showVideoList.count
-//        }
-//        else{
-//            return  self.VideoSubscriptionArray.count
-////            if VideoSubscriptionArray.count > 0{
-////                return  self.VideoSubscriptionArray.count
-////            }
-////            else{
-////                return 1
-////            }
-//
-//        }
-//    }
-
+//            else{
+//                return 1
+//            }
+           
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        if collectionView == showvideosCollectionView{
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "showVideosCollectionViewCell", for: indexPath as IndexPath) as! ShowVideosCollectionViewCell
-//
-//            if indexPath.item == 0 {
-//                cell.delegate = self
-//            }
-//            cell.delegate = self
-//            if fromCategories {
-//                cell.isFromCategories = true
-//                cell.videoItem = categoryList[indexPath.row]
-//
-//            } else {
-//                cell.isFromCategories = false
-//                cell.videoItem = showVideoList[indexPath.row]
-//            }
-//
-//            return cell
-//        }
-//        else{
+        if collectionView == showvideosCollectionView{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "showVideosCollectionViewCell", for: indexPath as IndexPath) as! ShowVideosCollectionViewCell
+            
+            if indexPath.item == 0 {
+                cell.delegate = self
+            }
+            cell.delegate = self
+            if fromCategories {
+                cell.isFromCategories = true
+                cell.videoItem = categoryList[indexPath.row]
+                
+            } else {
+                cell.isFromCategories = false
+                cell.videoItem = showVideoList[indexPath.row]
+            }
+            
+            return cell
+        }
+        else{
             if VideoSubscriptionArray.count > 0{
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "subscriptionCell", for: indexPath as IndexPath) as! SubscriptionListCell
-                let text = self.getProductDetails(productId: VideoSubscriptionArray[indexPath.row].ios_keyword!)
-                cell.subscriptionNameLabel.text = self.VideoSubscriptionArray[indexPath.row].subscription_name
-                cell.priceLabel.text = text
+                if VideoSubscriptionArray[indexPath.row].ios_keyword != nil{
+                    let text = self.getProductDetails(productId: VideoSubscriptionArray[indexPath.row].ios_keyword!)
+                    cell.subscriptionNameLabel.text = self.VideoSubscriptionArray[indexPath.row].subscription_name
+                    cell.priceLabel.text = text
+                }
+               
                 cell.backgroundColor = UIColor(white: 1, alpha: 0.3)
-
+            
                 self.watchListButton.clipsToBounds = true
                 self.watchListButton.layer.borderWidth = 1
                   cell.layer.borderColor = UIColor(white: 1, alpha: 0.5).cgColor
-
+               
                 return cell
             }
             else{
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "subscriptionCell", for: indexPath as IndexPath) as! SubscriptionListCell
                 cell.backgroundColor = ThemeManager.currentTheme().grayImageColor
-
-
+            
+                
                 return cell
             }
-//        }
-
+        }
+        
     }
     func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-//        if collectionView == showvideosCollectionView{
-//            if let previousIndexPath = context.previouslyFocusedIndexPath ,
-//               let cell = showvideosCollectionView.cellForItem(at: previousIndexPath) {
-//                print("previousIndexPath")
-//                cell.contentView.layer.borderWidth = 0.0
-//                cell.contentView.layer.shadowRadius = 0.0
-//                cell.contentView.layer.shadowOpacity = 0
-//
-//            }
-//
-//            if let indexPath = context.nextFocusedIndexPath,
-//               let cell = showvideosCollectionView.cellForItem(at: indexPath) {
-//                print("nextFocusedIndexPath")
-//                cell.contentView.layer.borderWidth = 6.0
-//                cell.contentView.layer.borderColor = UIColor.white.cgColor
-//                cell.contentView.layer.cornerRadius = 8
-//
-//            }
-//        }
-//        else{
+    
+        if collectionView == showvideosCollectionView{
+            if let previousIndexPath = context.previouslyFocusedIndexPath ,
+               let cell = showvideosCollectionView.cellForItem(at: previousIndexPath) {
+                print("previousIndexPath")
+                cell.contentView.layer.borderWidth = 0.0
+                cell.contentView.layer.shadowRadius = 0.0
+                cell.contentView.layer.shadowOpacity = 0
+                
+            }
+
+            if let indexPath = context.nextFocusedIndexPath,
+               let cell = showvideosCollectionView.cellForItem(at: indexPath) {
+                print("nextFocusedIndexPath")
+                cell.contentView.layer.borderWidth = 6.0
+                cell.contentView.layer.borderColor = UIColor.white.cgColor
+                cell.contentView.layer.cornerRadius = 8
+
+            }
+        }
+        else{
             if let previousIndexPath = context.previouslyFocusedIndexPath ,
                let cell = SubscriptionListView.cellForItem(at: previousIndexPath) {
                 print("previousIndexPath")
                 cell.contentView.layer.borderWidth = 0.0
                 cell.contentView.layer.shadowRadius = 0.0
                 cell.contentView.layer.shadowOpacity = 0
-
+                
             }
 
             if let indexPath = context.nextFocusedIndexPath,
@@ -830,19 +756,19 @@ extension VideoDetailsViewController: UICollectionViewDelegateFlowLayout, UIColl
                 cell.contentView.layer.cornerRadius = 8
 
             }
-//        }
-
+        }
+        
     }
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        if collectionView == showvideosCollectionView{
-//            let width = (self.view.frame.size.width) / 3.3
-//
-//
-//            return CGSize(width: view.bounds.width/5, height:  UIScreen.main.bounds.height * 0.2 + 40);
-//        }
-//        else{
+        if collectionView == showvideosCollectionView{
+            let width = (self.view.frame.size.width) / 3.3
+
+
+            return CGSize(width: view.bounds.width/5, height:  UIScreen.main.bounds.height * 0.2 + 40);
+        }
+        else{
             if VideoSubscriptionArray.count > 0{
                 print("video subscription array",VideoSubscriptionArray.count)
                 self.SubscriptionCVHeight.constant = 120
@@ -855,9 +781,9 @@ extension VideoDetailsViewController: UICollectionViewDelegateFlowLayout, UIColl
             }
 
 
-//        }
+        }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         if collectionView == showvideosCollectionView{
         return UIEdgeInsets(top: 20, left: 8, bottom:30, right: 20)
@@ -868,18 +794,18 @@ extension VideoDetailsViewController: UICollectionViewDelegateFlowLayout, UIColl
 
 //        return UIEdgeInsets(top: cellOffset / 2, left: 0, bottom: cellOffset / 2, right: 0)
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 50
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 50
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == showvideosCollectionView{
         if UserDefaults.standard.string(forKey: "skiplogin_status") == "true"{
-
+           
             print("skiplogin_status true")
             let signupPageView =  self.storyboard?.instantiateViewController(withIdentifier: "videoPlayer") as! videoPlayingVC
             signupPageView.selectedvideoItem = showVideoList[indexPath.row]
@@ -908,49 +834,231 @@ extension VideoDetailsViewController: UICollectionViewDelegateFlowLayout, UIColl
         }
     }
 }
+extension VideoDetailsViewController: ShowVideoDelegate  {
+    func didSelectSingleVideos(passModel: VideoModel?) {
+        if let image = passModel?.thumbnail_350_200 {
+            self.videoBackgroundImage.sd_setImage(with: URL(string: imageUrl + image),placeholderImage:UIImage(named: "lightGrey"))
+            self.videoBackgroundImage.contentMode = .scaleToFill
+        }
+        if let title = passModel?.video_title{
+            self.videoTitleLabel.text = title.uppercased()
+        }
+        
+        if let resolution =  ShowData[0].resolution {
+            self.metaDataLabel.text = resolution
+        }
+        if  let videoRating = ShowData[0].rating {
+            self.ratingLabel.text = videoRating
+            self.ratingLabel.isHidden = false
 
-extension VideoDetailsViewController: HomeTableViewCellDelegate  {
-  func didSelectFreeShows(passModel: VideoModel?) {
-
-  }
-
-  func didSelectNewArrivals(passModel: VideoModel?) {
-
-  }
-
-  func didSelectThemes(passModel: VideoModel?) {
-
-  }
-
-  func didSelectFilmOfTheDay(passModel: VideoModel?) {
-
-  }
-
-  func didSelectPartner(passModel: VideoModel?) {
-
-  }
-
-  func didFocusFilmOfTheDay() {
-
-  }
-
-  func didFocusNewArrivals(passModel: VideoModel) {
-
-  }
-
-  func didFocusThemes(passModel: VideoModel) {
-
-  }
-
-  func didFocusPartner(passModel: VideoModel) {
-
-  }
-
-    func didSelectHomeVideos(passModel: VideoModel) {
+        }
+        else{
+            self.ratingLabel.isHidden = true
+        }
+        if let audio_language_name = ShowData[0].audio_language_name{
+            DirectorLabel.text = "Audio : \(audio_language_name)"
+            myMutableString = NSMutableAttributedString(string: DirectorLabel.text! as String)
+            myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: ThemeManager.currentTheme().UIImageColor, range: NSRange(location:0,length:8))
+            self.DirectorLabel.attributedText = myMutableString
+        }
+        if let description = passModel?.video_description{
+          self.videoDescriptionLabel.numberOfLines = 4
+            self.videoDescriptionLabel.text = description
+        }
+        if let cast = passModel?.show_cast{
+            CastLabel.text = "CAST : \(cast)"
+            myMutableString = NSMutableAttributedString(string: CastLabel.text! as String)
+            myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: ThemeManager.currentTheme().UIImageColor, range: NSRange(location:0,length:4))
+            self.CastLabel.attributedText = myMutableString
+        }
+        if !categoryListArray.isEmpty {
+            var name = ""
+            for i in categoryListArray {
+                name =  name + "," + (i.category_name!)
+            }
+            print(String(name.dropFirst()))
+            ThemeLabel.text = "THEME : \(name.dropFirst())"
+            myMutableString = NSMutableAttributedString(string: ThemeLabel.text! as String)
+            myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: ThemeManager.currentTheme().UIImageColor, range: NSRange(location:0,length:5))
+            self.ThemeLabel.attributedText = myMutableString
+        }
+//        self.playButton.isEnabled = true
+        self.watchListButton.isEnabled = true
 
     }
+    func didSelectShowVideos(passModel: VideoModel?) {
+        if let image = passModel?.videos![0].thumbnail_350_200 {
+            self.videoBackgroundImage.sd_setImage(with: URL(string: imageUrl + image),placeholderImage:UIImage(named: "lightGrey"))
+            self.videoBackgroundImage.contentMode = .scaleToFill
+        }
+        if let title = passModel?.videos![0].video_title{
+            self.videoTitleLabel.text = title.uppercased()
+        }
+        
+        if let resolution =  ShowData[0].resolution {
+            self.metaDataLabel.text = resolution
+        }
+        if  let videoRating = ShowData[0].rating {
+            self.ratingLabel.text = videoRating
+            self.ratingLabel.isHidden = false
 
+        }
+        else{
+            self.ratingLabel.isHidden = true
 
+        }
+        if let audio_language_name = ShowData[0].audio_language_name{
+            DirectorLabel.text = "AUDIO : \(audio_language_name)"
+            myMutableString = NSMutableAttributedString(string: DirectorLabel.text! as String)
+            myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: ThemeManager.currentTheme().UIImageColor, range: NSRange(location:0,length:8))
+            self.DirectorLabel.attributedText = myMutableString
+        }
+        if let description = passModel?.videos![0].video_description{
+          self.videoDescriptionLabel.numberOfLines = 4
+            self.videoDescriptionLabel.text = description
+        }
+        if let cast = passModel?.videos![0].show_cast{
+            CastLabel.text = "CAST : \(cast)"
+            myMutableString = NSMutableAttributedString(string: CastLabel.text! as String)
+            myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: ThemeManager.currentTheme().UIImageColor, range: NSRange(location:0,length:4))
+            self.CastLabel.attributedText = myMutableString
+        }
+        if !categoryListArray.isEmpty {
+            var name = ""
+            for i in categoryListArray {
+                name =  name + "," + (i.category_name!)
+            }
+            print(String(name.dropFirst()))
+            ThemeLabel.text = "THEME : \(name.dropFirst())"
+            myMutableString = NSMutableAttributedString(string: ThemeLabel.text! as String)
+            myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: ThemeManager.currentTheme().UIImageColor, range: NSRange(location:0,length:5))
+            self.ThemeLabel.attributedText = myMutableString
+        }
+//        self.playButton.isEnabled = true
+        self.watchListButton.isEnabled = true
+//        self.playButton.isEnabled = true
+        self.watchListButton.isEnabled = true
+
+    }
+    func printSecondsToHoursMinutesSeconds (seconds:Int) -> () {
+        let (h, m, s) = secondsToHoursMinutesSeconds (seconds: seconds)
+      print ("\(h) Hours, \(m) Minutes, \(s) Seconds")
+    }
+    func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
+      return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
+    }
+    func didSelectCategory(passModel: VideoModel?) {
+        print("didSelectCategory",URL(string: showUrl + (passModel?.logo_thumb)!))
+
+        if let logo = passModel?.logo_thumb {
+            self.videoBackgroundImage.sd_setImage(with: URL(string: showUrl + logo),placeholderImage:UIImage(named: "lightGrey"))
+            
+        }
+        
+        if let cast = passModel?.show_cast{
+            CastLabel.text = "cast : \(cast)"
+        }
+        self.playButton.isEnabled = true
+        self.watchListButton.isEnabled = true
+        self.metaDataLabel.text = passModel?.resolution
+        self.videoBackgroundImage.contentMode = .scaleToFill
+        self.videoTitleLabel.text = passModel?.show_name
+        self.videoDescriptionLabel.text = passModel?.synopsis
+        self.videoDescriptionLabel.numberOfLines = 0
+
+        
+    }
+}
+extension VideoDetailsViewController: UITableViewDataSource, UITableViewDelegate,UIScrollViewDelegate  {
+   
+    
+    func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return  showVideoList.count
+        
+    }
+    
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+        
+    }
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTableCell", for: indexPath) as! HomeTableViewCell
+        cell.selectionStyle = .none
+        cell.delegate = self
+        cell.backgroundColor = UIColor.clear
+        cell.videoType = "VideoDetails"
+        if ShowData[0].single_video == 1 {
+            cell.videoArray =  self.showVideoList
+        }
+        else{
+            cell.videoArray =  self.showVideoList[indexPath.section].videos
+
+        }
+        return cell
+        
+    }
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("hello")
+        
+    }
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if ShowData[0].single_video == 1 {
+            return rowHeight
+        }
+        else{
+            if self.showVideoList[indexPath.section].videos!.isEmpty {
+                return 0
+            }
+            return rowHeight
+        }
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        if ShowData[0].single_video == 1 {
+            return (rowHeight) * 0.2 - 50
+        }
+        else{
+            if self.showVideoList[section].videos!.isEmpty {
+                return 0
+            }
+            return (rowHeight) * 0.2 - 50
+        }
+           
+
+       
+    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        let titleLabel = UILabel()
+        titleLabel.textColor = .white
+        titleLabel.textAlignment = .left
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 30)
+        titleLabel.frame = CGRect(x: 30, y: 0, width: view.bounds.width, height: (rowHeight) * 0.2 - 20).integral
+        if ShowData[0].single_video == 1 {
+        titleLabel.text =  ""
+
+        }
+        else{
+            titleLabel.text =  " Season \(self.showVideoList[section].season!)"
+
+        }
+        headerView.addSubview(titleLabel)
+        headerView.backgroundColor = .clear
+        return headerView
+    }
+    
+    
+}
+extension VideoDetailsViewController: HomeTableViewCellDelegate  {
+    func didSelectHomeVideos(passModel: VideoModel) {
+        
+    }
+    
+   
     func didSelectDianamicVideos(passModel: VideoModel?) {
         let videoPlayerController =  self.storyboard?.instantiateViewController(withIdentifier: "videoPlayer") as! videoPlayingVC
         videoPlayerController.selectedvideoItem = passModel
@@ -979,8 +1087,8 @@ extension VideoDetailsViewController: HomeTableViewCellDelegate  {
           if let title = passModel.video_title{
               self.videoTitleLabel.text = title.uppercased()
           }
-
-
+          
+        
           if let description = passModel.video_description{
             self.videoDescriptionLabel.numberOfLines = 4
               self.videoDescriptionLabel.text = description
@@ -1000,138 +1108,30 @@ extension VideoDetailsViewController: HomeTableViewCellDelegate  {
           self.watchListButton.isEnabled = true
           print("Focus on  episodes",passModel.video_id)
     }
-
+    
 }
 
-extension VideoDetailsViewController: ShowVideoDelegate  {
-  func didSelectSingleVideos(passModel: VideoModel?) {
-      if let image = passModel?.thumbnail_350_200 {
-          self.videoBackgroundImage.sd_setImage(with: URL(string: imageUrl + image),placeholderImage:UIImage(named: "lightGrey"))
-          self.videoBackgroundImage.contentMode = .scaleToFill
-      }
-      if let title = passModel?.video_title{
-          self.videoTitleLabel.text = title.uppercased()
-      }
-
-      if let resolution =  ShowData[0].resolution {
-          self.metaDataLabel.text = resolution
-      }
-      if  let videoRating = ShowData[0].rating {
-          self.ratingLabel.text = videoRating
-          self.ratingLabel.isHidden = false
-
-      }
-      else{
-          self.ratingLabel.isHidden = true
-      }
-      if let audio_language_name = ShowData[0].audio_language_name{
-          DirectorLabel.text = "Audio : \(audio_language_name)"
-          myMutableString = NSMutableAttributedString(string: DirectorLabel.text! as String)
-          myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: ThemeManager.currentTheme().UIImageColor, range: NSRange(location:0,length:8))
-          self.DirectorLabel.attributedText = myMutableString
-      }
-      if let description = passModel?.video_description{
-        self.videoDescriptionLabel.numberOfLines = 4
-          self.videoDescriptionLabel.text = description
-      }
-      if let cast = passModel?.show_cast{
-          CastLabel.text = "CAST : \(cast)"
-          myMutableString = NSMutableAttributedString(string: CastLabel.text! as String)
-          myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: ThemeManager.currentTheme().UIImageColor, range: NSRange(location:0,length:4))
-          self.CastLabel.attributedText = myMutableString
-      }
-      if !categoryListArray.isEmpty {
-          var name = ""
-          for i in categoryListArray {
-              name =  name + "," + (i.category_name!)
-          }
-          print(String(name.dropFirst()))
-          ThemeLabel.text = "THEME : \(name.dropFirst())"
-          myMutableString = NSMutableAttributedString(string: ThemeLabel.text! as String)
-          myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: ThemeManager.currentTheme().UIImageColor, range: NSRange(location:0,length:5))
-          self.ThemeLabel.attributedText = myMutableString
-      }
-//        self.playButton.isEnabled = true
-      self.watchListButton.isEnabled = true
-
-  }
-
-    func didSelectShowVideos(passModel: VideoModel?) {
-        if passModel?.thumbnail != nil{
-            print("didSelectShowVideos",URL(string: imageUrl + (passModel?.thumbnail)!))
-            self.videoBackgroundImage.sd_setImage(with: URL(string: imageUrl + (passModel?.thumbnail)!),placeholderImage:UIImage(named: "lightGrey"))
-        }
-//        self.playButton.isEnabled = true
-        self.watchListButton.isEnabled = true
-        if let resolution =  ShowData[0].resolution,let AudioResolution = passModel?.video_duration
-       ,let videoRating = ShowData[0].rating {
-
-            self.metaDataLabel.text = "\(resolution) • \(videoRating) "
-        }
-
-        if let cast = self.ShowData[0].show_cast{
-            CastLabel.text = "CAST : \(cast)"
-            myMutableString = NSMutableAttributedString(string: CastLabel.text! as String)
-            myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: ThemeManager.currentTheme().UIImageColor, range: NSRange(location:0,length:4))
-            self.CastLabel.attributedText = myMutableString
-        }
-        if let director = self.ShowData[0].director{
-            DirectorLabel.text = "DIRECTOR : \(director)"
-            myMutableString = NSMutableAttributedString(string: DirectorLabel.text! as String)
-            myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: ThemeManager.currentTheme().UIImageColor, range: NSRange(location:0,length:8))
-            self.DirectorLabel.attributedText = myMutableString
-        }
 
 
 
 
-            if !categoryListArray.isEmpty {
-              var name = ""
-              for i in categoryListArray {
-                name =  name + "," + (i.category_name!)
-              }
-              print(String(name.dropFirst()))
-                ThemeLabel.text = "THEME : \(name.dropFirst())"
-                myMutableString = NSMutableAttributedString(string: ThemeLabel.text! as String)
-                myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: ThemeManager.currentTheme().UIImageColor, range: NSRange(location:0,length:5))
-                self.ThemeLabel.attributedText = myMutableString
-            }
 
+extension CALayer {
+   func addGradienBorder(colors:[UIColor],width:CGFloat = 1) {
+       let gradientLayer = CAGradientLayer()
+       gradientLayer.frame =  CGRect(origin: .zero, size: self.bounds.size)
+       gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
+       gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
+       gradientLayer.colors = colors.map({$0.cgColor})
 
+       let shapeLayer = CAShapeLayer()
+       shapeLayer.lineWidth = width
+       shapeLayer.path = UIBezierPath(rect: self.bounds).cgPath
+       shapeLayer.fillColor = nil
+       shapeLayer.strokeColor = UIColor.black.cgColor
+       gradientLayer.mask = shapeLayer
 
-//        self.metaDataLabel.text =   String(format: "%@*%@", ShowData[0].resolution as! CVarArg,passModel?.video_duration as! CVarArg)
+       self.addSublayer(gradientLayer)
+   }
 
-        self.videoTitleLabel.text = passModel?.video_title?.uppercased()
-        self.videoDescriptionLabel.text = passModel?.video_description
-                self.videoBackgroundImage.contentMode = .scaleToFill
-        self.videoDescriptionLabel.numberOfLines = 4
-
-    }
-    func printSecondsToHoursMinutesSeconds (seconds:Int) -> () {
-        let (h, m, s) = secondsToHoursMinutesSeconds (seconds: seconds)
-      print ("\(h) Hours, \(m) Minutes, \(s) Seconds")
-    }
-    func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
-      return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
-    }
-    func didSelectCategory(passModel: VideoModel?) {
-        print("didSelectCategory",URL(string: showUrl + (passModel?.thumbnail)!))
-
-        if let logo = passModel?.thumbnail {
-            self.videoBackgroundImage.sd_setImage(with: URL(string: showUrl + logo),placeholderImage:UIImage(named: "lightGrey"))
-
-        }
-
-        if let cast = passModel?.show_cast{
-            CastLabel.text = "cast : \(cast)"
-        }
-        self.playButton.isEnabled = true
-        self.watchListButton.isEnabled = true
-        self.metaDataLabel.text = passModel?.resolution
-        self.videoBackgroundImage.contentMode = .scaleToFill
-        self.videoTitleLabel.text = passModel?.show_name
-        self.videoDescriptionLabel.text = passModel?.synopsis
-        self.videoDescriptionLabel.numberOfLines = 0
-
-    }
 }

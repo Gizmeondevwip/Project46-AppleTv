@@ -13,13 +13,13 @@ class PartnerViewController: UIViewController {
     @IBOutlet weak var PartnerTableView: UITableView!
     @IBOutlet weak var PartnerNameLabel: UILabel!
     @IBOutlet weak var PartnerDescriptionLabel: UILabel!
-
+    
     @IBOutlet weak var PartnerDescriptionHeight: NSLayoutConstraint!
-
-
+    
+    
     @IBOutlet weak var ImageViewHeight: NSLayoutConstraint!
     @IBOutlet weak var ImageViewWidth: NSLayoutConstraint!
-
+    
     var dianamicVideos = [VideoModel]()
     var Categories = [VideoModel]()
      var categoryModel: VideoModel!
@@ -29,7 +29,7 @@ class PartnerViewController: UIViewController {
     fileprivate let rowHeight = UIScreen.main.bounds.height * 0.3
     var partnerName = String()
 
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let nib2 =  UINib(nibName: "CommonTableViewCell", bundle: nil)
@@ -55,17 +55,17 @@ class PartnerViewController: UIViewController {
         self.ImageViewHeight.constant = (view.frame.height/2.3)
         self.PartnerDescriptionHeight.constant = (view.frame.height/2.3)
 
-
+        
     }
-
+    
     var VideoNameLabelHeight = CGFloat()
 
     var ShowData = [PartnerModel]()
         func getPartnerVideos() {
-
+           
           Categories.removeAll()
           var parameterDict: [String: String?] = [ : ]
-
+   
             parameterDict["key"] = String(categoryModel.partner_id!)
 
           parameterDict["user_id"] = String(UserDefaults.standard.integer(forKey: "user_id"))
@@ -80,22 +80,22 @@ class PartnerViewController: UIViewController {
 
 
             ApiCommonClass.getPartnerByPartnerid(parameterDictionary: parameterDict as? Dictionary<String, String>) { [self] (responseDictionary: Dictionary) in
-
-
+            
+           
             if responseDictionary["error"] != nil {
                   DispatchQueue.main.async {
                     self.PartnerTableView.reloadData()
-
+                
                   }
                 } else {
-
+              
                 if responseDictionary["partner_image"] != nil{
                     self.titleImage = responseDictionary["partner_image"] as! String
                      self.PartnerImage.sd_setImage(with: URL(string: ((imageUrl + self.titleImage).addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)),placeholderImage:UIImage(named: "placeHolder400*333"))
                     print(showUrl + self.titleImage)
                 }
                  if responseDictionary["partner_description"] != nil{
-
+                 
                              self.partnerDescription1 = responseDictionary["partner_description"] as! String
                     self.PartnerDescriptionLabel.text = self.partnerDescription1
                     VideoNameLabelHeight =      label.heightForLabel(text: self.self.partnerDescription1, font: font, width: view.frame.width - ImageViewWidth.constant)
@@ -110,43 +110,43 @@ class PartnerViewController: UIViewController {
                 if responseDictionary["partner_name"] != nil{
                             self.partnerName = responseDictionary["partner_name"] as! String
                     self.PartnerNameLabel.text = self.partnerName
-
-
+                    
+                   
                 }
-
-
-
+               
+               
+                
                     self.dianamicVideos.removeAll()
                     if responseDictionary["data"] != nil{
                         self.dianamicVideos = responseDictionary["data"] as! [VideoModel]
                         if self.dianamicVideos.count == 0 {
                             DispatchQueue.main.async {
                                 self.PartnerTableView.reloadData()
-
+                                
                                 self.PartnerTableView.isHidden = false
                             }
                         } else {
                             DispatchQueue.main.async {
                                 self.PartnerTableView.reloadData()
-
+                                
                                 self.PartnerTableView.isHidden = false
-
-
+                                
+                                
                             }
                         }
                 }
             }
-
-
+            
+            
             }
         }
 }
 extension PartnerViewController:UITableViewDataSource, UITableViewDelegate,UIScrollViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
-
+        
     }
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         dianamicVideos.count
     }
@@ -161,15 +161,15 @@ extension PartnerViewController:UITableViewDataSource, UITableViewDelegate,UIScr
         return cell
     }
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
+   
         return rowHeight
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-
+        
             if self.dianamicVideos[section].videos!.isEmpty {
                 return 0
             }
-
+        
         return (rowHeight) * 0.2 - 30
     }
     func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
@@ -183,47 +183,42 @@ extension PartnerViewController:UITableViewDataSource, UITableViewDelegate,UIScr
         titleLabel.font = UIFont.boldSystemFont(ofSize: 30)
 
         titleLabel.frame = CGRect(x: 8, y: 0, width: view.bounds.width, height: (rowHeight) * 0.2 - 20).integral
-
+        
         titleLabel.text =  dianamicVideos[section].show_name
 
         headerView.addSubview(titleLabel)
         headerView.backgroundColor = .clear
         return headerView
     }
-
+    
 }
 extension PartnerViewController: CommonVideoTableViewCellDelegate  {
-  func didSelectHomeVideos(passModel: VideoModel?) {
-
-  }
-
-    func didSelectFilmOfTheDay(passModel: VideoModel?) {
-
+    func didSelectHomeVideos(passModel: VideoModel?) {
+        
     }
-
-    func didFocusFilmOfTheDay(passModel: VideoModel) {
-
-    }
-
+    
+   
+    
+   
     func didSelectFreeShows(passModel: VideoModel?) {
         print("hello")
     }
-
+    
     func didSelectNewArrivals(passModel: VideoModel?) {
         print("hello")
 
     }
-
+    
     func didSelectThemes(passModel: VideoModel?) {
         print("hello")
 
     }
-
+    
     func didSelectDianamicVideos(passModel: VideoModel?) {
         print("hello")
 
     }
-
+    
     func didSelectPartner(passModel: VideoModel?) {
         let video = passModel
           print("video id = \(video)")
@@ -231,31 +226,31 @@ extension PartnerViewController: CommonVideoTableViewCellDelegate  {
         signupPageView.selectedvideoItem = passModel
         self.present(signupPageView, animated: true, completion: nil)
     }
-
+    
     func didFocusFreeShows(passModel: VideoModel) {
         print("hello")
 
     }
-
+    
     func didFocusNewArrivals(passModel: VideoModel) {
         print("hello")
 
     }
-
+    
     func didFocusThemes(passModel: VideoModel) {
         print("hello")
 
     }
-
+    
     func didFocusDianamicVideos(passModel: VideoModel) {
         print("hello")
 
     }
-
+    
     func didFocusPartner(passModel: VideoModel) {
         print("hello")
     }
-
+    
 }
 extension UILabel {
 

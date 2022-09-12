@@ -11,11 +11,11 @@ import TVUIKit
 import SDWebImage
 
 class PopularCollectionViewCell: UICollectionViewCell {
-
+    
     @IBOutlet weak var videoImageView: UIImageView!{
         didSet {
-            //   videoImageView.layer.cornerRadius = 25
-            // videoImageView.layer.masksToBounds = true
+               videoImageView.layer.cornerRadius = 16
+             videoImageView.layer.masksToBounds = true
         }
     }
     @IBOutlet weak var moreButton: UIButton!{
@@ -23,24 +23,24 @@ class PopularCollectionViewCell: UICollectionViewCell {
             moreButton.isUserInteractionEnabled = true
         }
     }
-  @IBOutlet weak var bottomGradientView: UIView!{
-      didSet{
-          bottomGradientView.setGradientBackground(colorTop:UIColor.clear, colorBottom: UIColor.black, height: 300)
-          }
-      }
-  @IBOutlet weak var progressView: UIProgressView!{
-      didSet{
-          progressView.progressTintColor = .red
-          progressView.trackTintColor = .white
-          progressView.layer.cornerRadius = 2
-                  }
-  }
     @IBOutlet weak var nameLabel: UILabel!{
         didSet{
 //            nameLabel.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         }
     }
-
+    @IBOutlet weak var bottomGradientView: UIView!{
+        didSet{
+            bottomGradientView.setGradientBackground(colorTop:UIColor.clear, colorBottom: UIColor.black, height: 300)
+            }
+        }
+    
+    @IBOutlet weak var progressView: UIProgressView!{
+        didSet{
+            progressView.progressTintColor = .red
+            progressView.trackTintColor = .white
+            progressView.layer.cornerRadius = 2
+                    }
+    }
     @IBOutlet weak var liveLabel: UILabel!{
         didSet{
             liveLabel.layer.cornerRadius = 8
@@ -57,27 +57,27 @@ class PopularCollectionViewCell: UICollectionViewCell {
             titleLabel.text = titleText
         }
     }
-
+    
     /// public property to store the text for the title image
     internal var titleImage: String! {
         didSet {
             titleImageView.sd_setImage(with: URL(string: titleImage.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!),placeholderImage:UIImage(named: "placeHolder"))
         }
     }
-
+   
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.moreButton.isFocused
         setupUI()
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-
+        
         setupUI()
     }
-
-
+    
+    
     fileprivate  let scaleFactor: CGFloat = 1.1
 //    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
 //        super.didUpdateFocus(in: context, with: coordinator)
@@ -97,8 +97,8 @@ class PopularCollectionViewCell: UICollectionViewCell {
 //    }
     override func layoutSubviews() {
         super.layoutSubviews()
-
-
+        
+      
     }
     internal func setupUI() {
         titleLabel = UILabel()
@@ -106,14 +106,14 @@ class PopularCollectionViewCell: UICollectionViewCell {
         titleLabel.isHidden = true
         titleImageView.isHidden = true
     }
-
+    
     fileprivate var titleLabel: UILabel! {
         didSet {
             titleLabel.textColor = .white
             titleLabel.font = titleLabel.font.withSize(30)
             titleLabel.numberOfLines = 0
             titleLabel.lineBreakMode = .byWordWrapping
-
+            
             addSubview(titleLabel)
             titleLabel.isHidden = true
         }
@@ -124,6 +124,6 @@ class PopularCollectionViewCell: UICollectionViewCell {
             addSubview(titleImageView)
         }
     }
-
+    
 }
 

@@ -104,9 +104,19 @@ public class ApiRESTUrlString {
     }
   
     func getDianamicHomeVideos(parameterDictionary:Dictionary<String,String>!) -> String! {
-      let urlString = GetDianamicHome
-      print("dynmaicHomeVideo",urlString)
-      return urlString
+        if parameterDictionary["offset"] == "0"{
+            let urlString = GetDianamicHomeWithoutOffset
+            print("dynmaicHomeVideo",urlString)
+            return urlString
+
+        }
+        else{
+            let urlString = String(format:GetDianamicHome + "%@",parameterDictionary["offset"]!)
+            print("dynmaicHomeVideo",urlString)
+            return urlString
+        }
+
+        
     }
     func getFeaturedVideos(parameterDictionary:Dictionary<String,String>!) -> String! {
         let urlString = GetFeaturedVideos

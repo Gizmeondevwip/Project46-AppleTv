@@ -74,16 +74,15 @@ class LogoutViewController: UIViewController {
     ApiCommonClass.UserDeletion(parameterDictionary: parameterDict as? Dictionary<String, String>){ (result) -> () in
               print(result)
               if result {
-                  UserDefaults.standard.removeObject(forKey: "user_id")
-                  UserDefaults.standard.removeObject(forKey: "login_status")
-                  UserDefaults.standard.removeObject(forKey: "first_name")
-                  UserDefaults.standard.removeObject(forKey: "skiplogin_status")
-                  UserDefaults.standard.removeObject(forKey: "access_token")
-                  Application.shared.userSubscriptionsArray.removeAll()
+                UserDefaults.standard.removeObject(forKey: "user_id")
+                UserDefaults.standard.removeObject(forKey: "login_status")
+                UserDefaults.standard.removeObject(forKey: "first_name")
+                UserDefaults.standard.removeObject(forKey: "skiplogin_status")
+                UserDefaults.standard.removeObject(forKey: "access_token")
+                UserDefaults.standard.removeObject(forKey: "user_email")
 
-                  let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                  let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Login") as! LoginViewController
-                  self.navigationController?.pushViewController(nextViewController, animated: false)
+                let signupPageView =  self.storyboard?.instantiateViewController(withIdentifier: "NewLoginVC") as! NewLoginViewController
+                self.present(signupPageView, animated: true, completion: nil)
               } else {
                 DispatchQueue.main.async {
                 }

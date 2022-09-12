@@ -1,6 +1,0 @@
-framework module Pods_ISG {
-  umbrella header "Pods-ISG-umbrella.h"
-
-  export *
-  module * { export * }
-}

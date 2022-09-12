@@ -7,13 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		871C238B28A635BF00F456BD /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871C238A28A635BF00F456BD /* SubscriptionViewController.swift */; };
 		8754946F22E8904C00F2FBB5 /* AppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8754946E22E8904C00F2FBB5 /* AppHelper.swift */; };
 		8754959222E8909300F2FBB5 /* DianamicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8754958722E8909300F2FBB5 /* DianamicModel.swift */; };
 		8754959422E8909300F2FBB5 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8754958922E8909300F2FBB5 /* VideoModel.swift */; };
 		8754959522E8909300F2FBB5 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8754958A22E8909300F2FBB5 /* Video.swift */; };
-		8783DBA528A679D000325AF7 /* SubscriptionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8783DBA428A679CC00325AF7 /* SubscriptionCollectionViewCell.xib */; };
-		8783DBA728A679E200325AF7 /* SubscriptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8783DBA628A679E100325AF7 /* SubscriptionCollectionViewCell.swift */; };
 		87990A3822E96D20005B3A3A /* ApiRESTUrlString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87990A3722E96D20005B3A3A /* ApiRESTUrlString.swift */; };
 		87990A3A22E96D4E005B3A3A /* ApiCommonClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87990A3922E96D4C005B3A3A /* ApiCommonClass.swift */; };
 		87990A3C22E96D7B005B3A3A /* ApiCallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87990A3B22E96D7B005B3A3A /* ApiCallManager.swift */; };
@@ -95,13 +92,10 @@
 		48541B67761EE76CB5567500 /* Pods-Justwatchme.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Justwatchme.release.xcconfig"; path = "Target Support Files/Pods-Justwatchme/Pods-Justwatchme.release.xcconfig"; sourceTree = "<group>"; };
 		503E52EDE49E5B9A1F61A42D /* Pods-Chicano Hollywood.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chicano Hollywood.debug.xcconfig"; path = "Target Support Files/Pods-Chicano Hollywood/Pods-Chicano Hollywood.debug.xcconfig"; sourceTree = "<group>"; };
 		54ED5EAC6B71CCE05AC1B59A /* Pods-FestiflixTV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FestiflixTV.debug.xcconfig"; path = "Target Support Files/Pods-FestiflixTV/Pods-FestiflixTV.debug.xcconfig"; sourceTree = "<group>"; };
-		871C238A28A635BF00F456BD /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubscriptionViewController.swift; path = ../../../../SubscriptionViewController.swift; sourceTree = "<group>"; };
 		8754946E22E8904C00F2FBB5 /* AppHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppHelper.swift; sourceTree = "<group>"; };
 		8754958722E8909300F2FBB5 /* DianamicModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DianamicModel.swift; sourceTree = "<group>"; };
 		8754958922E8909300F2FBB5 /* VideoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
 		8754958A22E8909300F2FBB5 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
-		8783DBA428A679CC00325AF7 /* SubscriptionCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubscriptionCollectionViewCell.xib; sourceTree = "<group>"; };
-		8783DBA628A679E100325AF7 /* SubscriptionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		87990A3722E96D20005B3A3A /* ApiRESTUrlString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiRESTUrlString.swift; sourceTree = "<group>"; };
 		87990A3922E96D4C005B3A3A /* ApiCommonClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiCommonClass.swift; sourceTree = "<group>"; };
 		87990A3B22E96D7B005B3A3A /* ApiCallManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiCallManager.swift; sourceTree = "<group>"; };
@@ -223,17 +217,6 @@
 			path = CollectionVIewCells;
 			sourceTree = "<group>";
 		};
-		871C238928A6355800F456BD /* Subscription */ = {
-			isa = PBXGroup;
-			children = (
-				871C238A28A635BF00F456BD /* SubscriptionViewController.swift */,
-				8783DBA628A679E100325AF7 /* SubscriptionCollectionViewCell.swift */,
-				8783DBA428A679CC00325AF7 /* SubscriptionCollectionViewCell.xib */,
-			);
-			name = Subscription;
-			path = Project46/Subscription;
-			sourceTree = SOURCE_ROOT;
-		};
 		8754924F22E88FC000F2FBB5 /* HelperClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,7 +264,6 @@
 		87D939C522E6D3E20085BB05 /* Project46 */ = {
 			isa = PBXGroup;
 			children = (
-				871C238928A6355800F456BD /* Subscription */,
 				9BB2045E2850F6A500082EF7 /* News */,
 				9B6CDB8D26FC52390096B596 /* Subtitle */,
 				9B3FDB0826F2E01B00ACC528 /* Privacy & Terms of use */,
@@ -566,7 +548,6 @@
 				9B9B13A625CC19C9005B0C8A /* SplashMusic.mp3 in Resources */,
 				9B240726258CE59A004D2BA3 /* WatchListCollectionCell.xib in Resources */,
 				87D939D122E6D4330085BB05 /* Assets.xcassets in Resources */,
-				8783DBA528A679D000325AF7 /* SubscriptionCollectionViewCell.xib in Resources */,
 				9BD5C9F9285700AA00B57029 /* NewsCollectionViewCell.xib in Resources */,
 				9BE58DD725D2972800CA5429 /* PartnerTableviewCell.xib in Resources */,
 				87D939CF22E6D3E20085BB05 /* Main.storyboard in Resources */,
@@ -653,7 +634,6 @@
 				9B7BD00325DA2A6B00017CD2 /* UIdevice.swift in Sources */,
 				8754946F22E8904C00F2FBB5 /* AppHelper.swift in Sources */,
 				9B240720258CD3A4004D2BA3 /* WatchListViwController.swift in Sources */,
-				8783DBA728A679E200325AF7 /* SubscriptionCollectionViewCell.swift in Sources */,
 				9B02BC4B231EA21300A3590F /* UIColor.swift in Sources */,
 				9BF532252637E6FB00283B54 /* SubscriptionListCell.swift in Sources */,
 				9B05E779235F11EB0097594B /* ShowDetailsModel.swift in Sources */,
@@ -663,7 +643,6 @@
 				9B9B13A325CC10EA005B0C8A /* ThemeManager.swift in Sources */,
 				8754959522E8909300F2FBB5 /* Video.swift in Sources */,
 				9BE906B9235EE4A600A39F55 /* VideoDetailsViewController.swift in Sources */,
-				871C238B28A635BF00F456BD /* SubscriptionViewController.swift in Sources */,
 				8754959422E8909300F2FBB5 /* VideoModel.swift in Sources */,
 				9B5C90A62590B81A00FE345D /* OtpVerificationViewController.swift in Sources */,
 				87990A3C22E96D7B005B3A3A /* ApiCallManager.swift in Sources */,
@@ -828,9 +807,9 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_TEAM = 2YU9KD46B6;
 				INFOPLIST_FILE = "$(SRCROOT)/Project46/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -890,7 +869,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ios.projectfortysix;
 				PRODUCT_NAME = Project46;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Project46 TvOS Profile";
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -905,9 +884,9 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_TEAM = 2YU9KD46B6;
 				INFOPLIST_FILE = "$(SRCROOT)/Project46/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -967,7 +946,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ios.projectfortysix;
 				PRODUCT_NAME = Project46;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Project46 TvOS Profile";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 12.2;

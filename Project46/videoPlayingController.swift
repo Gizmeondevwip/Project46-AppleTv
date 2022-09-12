@@ -12,11 +12,7 @@ import AVKit
 import Reachability
 import SimpleSubtitles
 
-class videoPlayingVC: UIViewController,IMAAdsLoaderDelegate ,IMAAdsManagerDelegate,videoPlayingDelegate,SubtitleDelegate,SubscriptionDelegate{
-  func didPressBackFromSubscriptionVC() {
-      self.dismiss(animated: true, completion: nil)
-  }
-
+class videoPlayingVC: UIViewController,IMAAdsLoaderDelegate ,IMAAdsManagerDelegate,videoPlayingDelegate,SubtitleDelegate{
     var token = ""
     var videos = [VideoModel]()
     var categoryModel : VideoModel!
@@ -150,7 +146,7 @@ class videoPlayingVC: UIViewController,IMAAdsLoaderDelegate ,IMAAdsManagerDelega
     
     override func viewWillDisappear(_ animated: Bool) {
         print("viewWillDisappear")
-//        hideContentPlayer()
+        hideContentPlayer()
         playerViewController?.player!.pause()
 
     }
@@ -193,9 +189,8 @@ class videoPlayingVC: UIViewController,IMAAdsLoaderDelegate ,IMAAdsManagerDelega
                 self.getVideoSubscriptions(video_id: video.video_id!)
             }
             else{
-              self.gotoSubscriptionVC(video_id: video.video_id!)
                 //subscription change
-//                self.initialView()
+                self.initialView()
 //                let alert = UIAlertController(title: "You dont have any active subscription \n Please subscribe!!", message: "", preferredStyle: UIAlertController.Style.alert)
 //                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler:  { action in
 //                    // do something like...
@@ -251,10 +246,8 @@ class videoPlayingVC: UIViewController,IMAAdsLoaderDelegate ,IMAAdsManagerDelega
                                 commonClass.stopActivityIndicator(onViewController: self)
                                 self.initialView()
                             } else {
-                              commonClass.stopActivityIndicator(onViewController: self)
-                              self.gotoSubscriptionVC(video_id: self.video.video_id!)
                                 //subscription change
-//                                self.initialView()
+                                self.initialView()
 
 //                                commonClass.stopActivityIndicator(onViewController: self)
 //                                let alert = UIAlertController(title: "You dont have any active subscription", message: "", preferredStyle: UIAlertController.Style.alert)
@@ -276,13 +269,7 @@ class videoPlayingVC: UIViewController,IMAAdsLoaderDelegate ,IMAAdsManagerDelega
             }
         }
     }
-  func gotoSubscriptionVC(video_id:Int){
-
-      let subscriptionVC =  self.storyboard?.instantiateViewController(withIdentifier: "subscriptionVC") as! SubscriptionViewController
-      subscriptionVC.subscriptionDelegate = self
-      subscriptionVC.videoId = video_id
-      self.present(subscriptionVC, animated: true, completion: nil)
-  }
+  
     func cancelAlertAction(){
         self.dismiss(animated: true, completion: nil)
         print("Go to subscription vc")
@@ -984,7 +971,7 @@ var pauseFlaglagCount = 1
         let encodedBundleIdUrl = originalBundleIdString?.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         videoPlayingVC.AdTagURLString = videoPlayingVC.AdTagURLString.replacingOccurrences(of: "[BUNDLE]", with: encodedBundleIdUrl!)
       } else {
-        let originalBundleIdString = "com.ios.projectfortysix"
+        let originalBundleIdString = "com.ios.Justwatchme.tv"
         let encodedBundleIdUrl = originalBundleIdString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         videoPlayingVC.AdTagURLString = videoPlayingVC.AdTagURLString.replacingOccurrences(of: "[BUNDLE]", with: encodedBundleIdUrl!)
       }

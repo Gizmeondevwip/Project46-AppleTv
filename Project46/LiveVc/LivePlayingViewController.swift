@@ -545,7 +545,7 @@ class LivePlayingViewController: UIViewController,IMAAdsLoaderDelegate ,IMAAdsMa
         let encodedBundleIdUrl = originalBundleIdString?.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         LivePlayingViewController.addLink = LivePlayingViewController.addLink.replacingOccurrences(of: "[BUNDLE]", with: encodedBundleIdUrl!)
       } else {
-        let originalBundleIdString = "com.ios.projectfortysix"
+        let originalBundleIdString = "com.happitv.ios"
         let encodedBundleIdUrl = originalBundleIdString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         LivePlayingViewController.addLink = LivePlayingViewController.addLink.replacingOccurrences(of: "[BUNDLE]", with: encodedBundleIdUrl!)
       }

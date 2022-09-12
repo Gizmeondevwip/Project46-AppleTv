@@ -810,68 +810,6 @@ Based on the applicable laws of your country, you may have the right to request 
             </objects>
             <point key="canvasLocation" x="2291" y="-3640"/>
         </scene>
-        <!--Subscription View Controller-->
-        <scene sceneID="cns-Rc-Sq4">
-            <objects>
-                <viewController storyboardIdentifier="subscriptionVC" id="DbM-dc-Vea" userLabel="Subscription View Controller" customClass="SubscriptionViewController" customModule="Project46" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="4o2-x4-MJW"/>
-                        <viewControllerLayoutGuide type="bottom" id="lKA-yh-kRx"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="fFJ-FY-7Bg">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61f-rK-jX5" userLabel="Header Label">
-                                <rect key="frame" x="960" y="224" width="0.0" height="232"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="38"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NLE-XN-PvD" userLabel="Subscription Collection View">
-                                <rect key="frame" x="840" y="476" width="240" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="240" id="0dW-x8-3tC"/>
-                                    <constraint firstAttribute="height" constant="128" id="4r5-Sh-GsO"/>
-                                </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xoy-6f-yZz">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" id="R2A-FD-n1i">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ku3-tS-m1h">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="NLE-XN-PvD" firstAttribute="top" secondItem="61f-rK-jX5" secondAttribute="bottom" constant="20" id="8mf-W1-cnW"/>
-                            <constraint firstItem="NLE-XN-PvD" firstAttribute="centerY" secondItem="fFJ-FY-7Bg" secondAttribute="centerY" id="Qv7-6o-50g"/>
-                            <constraint firstItem="61f-rK-jX5" firstAttribute="centerX" secondItem="fFJ-FY-7Bg" secondAttribute="centerX" id="Sz3-ST-8R3"/>
-                            <constraint firstItem="61f-rK-jX5" firstAttribute="centerY" secondItem="fFJ-FY-7Bg" secondAttribute="centerY" constant="-200" id="xf6-B9-Pvc"/>
-                            <constraint firstItem="NLE-XN-PvD" firstAttribute="centerX" secondItem="fFJ-FY-7Bg" secondAttribute="centerX" id="zWo-Iu-kJ4"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="headerLabel" destination="61f-rK-jX5" id="PCu-u9-7Wi"/>
-                        <outlet property="subscriptionCollectionView" destination="NLE-XN-PvD" id="IC3-iD-Tnu"/>
-                        <outlet property="subscriptionCollectionViewHeight" destination="4r5-Sh-GsO" id="DSg-v1-4L9"/>
-                        <outlet property="subscriptionCollectionViewWidth" destination="0dW-x8-3tC" id="9kt-At-ShC"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wQZ-0m-vMj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3136" y="-2239"/>
-        </scene>
         <!--New Login View Controller-->
         <scene sceneID="EMX-QH-yhz">
             <objects>
@@ -1788,7 +1726,6 @@ Based on the applicable laws of your country, you may have the right to request 
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="h1L-cC-5Ce" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="nEM-Vv-g6h">
-                        <rect key="frame" x="0.0" y="60" width="1205.5" height="145"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

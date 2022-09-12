@@ -12,7 +12,7 @@ import ParallaxView
 import Reachability
 
 class HomeViewController: UIViewController {
-
+    
 
     @IBOutlet weak var yearofReleaseName: UILabel!
     @IBOutlet weak var yearOfReleaseTitle: UILabel!
@@ -35,7 +35,7 @@ class HomeViewController: UIViewController {
         }
     }
     @IBOutlet weak var viewHeight: NSLayoutConstraint!
-
+    
     @IBOutlet weak var yearLabel: UILabel!
     let reachability = try! Reachability()
     var maxDianamicArray = [showByCategoryModel]()
@@ -49,7 +49,7 @@ class HomeViewController: UIViewController {
     fileprivate let rowHeight = UIScreen.main.bounds.height * 0.3
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         let nib2 =  UINib(nibName: "CommonTableViewCell", bundle: nil)
         HomeTableView.register(nib2, forCellReuseIdentifier: "mainTableViewCell")
         HomeTableView.delegate = self
@@ -70,9 +70,9 @@ class HomeViewController: UIViewController {
 
         bgView.layer.insertSublayer(gradientLayer, at: 0)
         HomeTableView.backgroundView = bgView
+     
 
-
-
+        
         reachability.whenUnreachable = { _ in
             commonClass.showAlert(viewController:self, messages: "Network connection lost!")
 
@@ -84,8 +84,8 @@ class HomeViewController: UIViewController {
         } catch {
             print("Unable to start notifier")
         }
-
-
+        
+        
         if UserDefaults.standard.string(forKey: "skiplogin_status") != nil{
             let status = UserDefaults.standard.string(forKey: "skiplogin_status")
             print("skiploginstatus",status)
@@ -112,7 +112,7 @@ class HomeViewController: UIViewController {
         }
 
     }
-
+    
     // MARK: Api Calls
     //Call to accces token api
     func getToken() {
@@ -123,18 +123,18 @@ class HomeViewController: UIViewController {
                 commonClass.stopActivityIndicator(onViewController: self)
                 commonClass.showAlert(viewController:self, messages: "Server error")
             } else {
-
+                
                 DispatchQueue.main.async {
                     commonClass.stopActivityIndicator(onViewController: self)
                     self.getDianamicHomeVideos()
 
-
+                    
                 }
             }
-
+            
         }
     }
-
+    
     // call to single category video api
     func getDianamicHomeVideos() {
         var parameterDict: [String: String?] = [ : ]
@@ -151,7 +151,7 @@ class HomeViewController: UIViewController {
           }
         print("parameterDict",parameterDict)
 
-        ApiCommonClass.getDianamicHomeVideos{ (responseDictionary: Dictionary) in
+        ApiCommonClass.getDianamicHomeVideos(parameterDictionary: parameterDict as? Dictionary<String, String>) { (responseDictionary: Dictionary) in
             if responseDictionary["error"] != nil {
                 DispatchQueue.main.async {
                     commonClass.stopActivityIndicator(onViewController: self)
@@ -191,14 +191,14 @@ class HomeViewController: UIViewController {
 
 
                 }
-
+               
             }
         }
     }
+    
+    
 
-
-
-
+    
     func app_Install_Launch() {
       var parameterDict: [String: String?] = [ : ]
       let currentDate = Int(Date().timeIntervalSince1970)
@@ -226,7 +226,7 @@ class HomeViewController: UIViewController {
       if let IPAddress = UserDefaults.standard.string(forKey:"IPAddress") {
         parameterDict["ip_address"] = IPAddress
       }
-
+     
       if let advertiser_id = UserDefaults.standard.string(forKey:"Idfa"){
         parameterDict["advertiser_id"] = advertiser_id
       }
@@ -250,21 +250,21 @@ class HomeViewController: UIViewController {
       if let user_email = UserDefaults.standard.string(forKey: "user_email"){
        parameterDict["user_email"] = user_email
       }
-
+       
       if let publisherid = UserDefaults.standard.string(forKey: "pubid") {
         parameterDict["publisherid"] = publisherid
       }
-
+      
         if let channelid = UserDefaults.standard.string(forKey:"channelid") {
             parameterDict["channel_id"] = channelid
         }
-
+     
       if (UserDefaults.standard.string(forKey:"skiplogin_status") == "false") {
-
+ 
       if (UserDefaults.standard.string(forKey: "phone") != nil){
        parameterDict["user_contact_number"] = UserDefaults.standard.string(forKey: "phone")
       }
-
+          
       }
         print("parameter dictionary install ",parameterDict)
         ApiCommonClass.analayticsAPI(parameterDictionary: parameterDict as? Dictionary<String, String>) { (responseDictionary: Dictionary) in
@@ -273,9 +273,9 @@ class HomeViewController: UIViewController {
             }
           } else {
             DispatchQueue.main.async {
-
+              
               print("app_Install_Launch")
-
+             
             }
           }
       }
@@ -309,7 +309,7 @@ class HomeViewController: UIViewController {
         }
       }
     }
-
+    
 }
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate,UIScrollViewDelegate  {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -327,14 +327,14 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate,UIScrol
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         return  dianamicVideos.count
-
+        
     }
-
+    
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
-
+        
     }
-
+   
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "mainTableViewCell", for: indexPath) as! CommonTableViewCell
         cell.selectionStyle = .none
@@ -342,7 +342,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate,UIScrol
         cell.backgroundColor = UIColor.clear
             cell.videoType = "Dianamic"
             let data = dianamicVideos[indexPath.section].shows
-
+      
             if (data?.count)! >= 10 {
                 cell.videoArray = dianamicVideos[indexPath.section].shows
             } else {
@@ -350,25 +350,25 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate,UIScrol
             }
         return cell
     }
-
+   
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let width  = UIScreen.main.bounds.width / 5
         let height = width * 9 / 16
             if self.dianamicVideos[indexPath.section].shows!.isEmpty {
                 return 0
             }
-         return height
+         return height 
     }
     func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
         return false
     }
-
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-
+       
             if self.dianamicVideos[section].shows!.isEmpty {
                 return 0
             }
-
+       
          return (rowHeight) * 0.2
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -383,33 +383,17 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate,UIScrol
         headerView.backgroundColor = .clear
         return headerView
     }
-
-
+    
+    
 }
 extension HomeViewController: CommonVideoTableViewCellDelegate  {
-  func didSelectFilmOfTheDay(passModel: VideoModel?) {
-
-  }
-
-  func didSelectPartner(passModel: VideoModel?) {
-
-  }
-
-  func didFocusFilmOfTheDay(passModel: VideoModel) {
-
-  }
-
-  func didFocusPartner(passModel: VideoModel) {
-
-  }
-
     func didSelectHomeVideos(passModel: VideoModel?) {
-
+        
     }
-
-
-
-
+    
+   
+    
+   
     func didSelectFreeShows(passModel: VideoModel?) {
         if let passModel = passModel  {
             let videoDetailView =  self.storyboard?.instantiateViewController(withIdentifier: "videoDetail") as! VideoDetailsViewController
@@ -418,13 +402,13 @@ extension HomeViewController: CommonVideoTableViewCellDelegate  {
             self.present(videoDetailView, animated: true, completion: nil)
         }
     }
-
+    
     func didSelectNewArrivals(passModel: VideoModel?) {
-
-
+      
+        
     }
     func didSelectThemes(passModel: VideoModel?) {
-
+       
     }
     func didSelectDianamicVideos(passModel: VideoModel?) {
               if passModel?.type == "NEWS"{
@@ -441,7 +425,7 @@ extension HomeViewController: CommonVideoTableViewCellDelegate  {
             print("Upcoming Event Clicked")
         }
        else if passModel?.type == "LIVE"{
-
+            
             let livePlayngViewController =  self.storyboard?.instantiateViewController(withIdentifier: "LiveVC") as! LivePlayingViewController
            livePlayngViewController.livelink = (passModel?.live_link)!
             self.present(livePlayngViewController, animated: true, completion: nil)
@@ -457,7 +441,7 @@ extension HomeViewController: CommonVideoTableViewCellDelegate  {
                 videoDetailView.fromCategories = false
             self.present(videoDetailView, animated: true, completion: nil)
         }
-
+            
             }
     func didSelectHomeVideos(passModel: VideoModel) {
 
@@ -469,7 +453,7 @@ extension HomeViewController: CommonVideoTableViewCellDelegate  {
             passModel.category_name?.forEach({ (theme) in
                 categories = theme + ",  " + categories
             })
-
+            
             videoDetailsLabel.text = "\(resolution)\n\nProducer: \(producer)\n\nYear: \(year)\n\nThemes: \(categories.dropLast(1))"
         }
     }
@@ -478,12 +462,12 @@ extension HomeViewController: CommonVideoTableViewCellDelegate  {
         if passModel.logo != nil{
             videoBackgroundImage.sd_setImage(with: URL(string: ((showUrl + passModel.logo!).addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)),placeholderImage:UIImage(named: "placeHolder"))
         }
-
+       
         if let show_name = passModel.show_name {
-
+            
 //            \n\n\(resolution)\n\nProducer: \(producer)\n\nYear: \(year)\n\nThemes: \(categories.dropLast(1))"
             videoNameLabel.text = show_name
-
+            
         }
         else{
             videoNameLabel.text?.removeAll()
@@ -505,11 +489,11 @@ extension HomeViewController: CommonVideoTableViewCellDelegate  {
         videoNameLabel.text = passModel.show_name
     }
     func didFocusThemes(passModel: VideoModel) {
-
-
+       
+         
     }
     func didFocusDianamicVideos(passModel: VideoModel) {
-
+        
         if passModel.logo_thumb != nil{
             videoBackgroundImage.sd_setImage(with: URL(string: ((passModel.logo_thumb!).addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)),placeholderImage:UIImage(named: "placeHolder"))
             videoBackgroundImage.backgroundColor = .clear
@@ -519,7 +503,7 @@ extension HomeViewController: CommonVideoTableViewCellDelegate  {
         }
         if let show_name = passModel.show_name {
             videoNameLabel.text = show_name
-
+            
         }
         else{
             if passModel.type == "LIVE"{
@@ -558,9 +542,9 @@ extension HomeViewController: CommonVideoTableViewCellDelegate  {
         else{
             videoDescrioptionLabel.text?.removeAll()
         }
-
+        
     }
-
+         
 }
 
 
@@ -594,5 +578,5 @@ extension UIView{
         gradientLayer.frame = UIScreen.main.bounds
        layer.insertSublayer(gradientLayer, at: 0)
      }
-
+    
 }

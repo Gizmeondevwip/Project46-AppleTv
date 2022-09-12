@@ -18,10 +18,10 @@ protocol ShowVideoDelegate:class {
 class ShowVideosCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var PlayImageView: UIImageView!
     @IBOutlet weak var videoThumbnailImageView: UIImageView!
-
+    
     @IBOutlet weak var videoTitle: UILabel!
     weak var delegate: ShowVideoDelegate!
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // self.layoutIfNeeded()
@@ -41,7 +41,7 @@ class ShowVideosCollectionViewCell: UICollectionViewCell {
                     videoThumbnailImageView.layer.masksToBounds = true
                     videoThumbnailImageView.contentMode = .scaleToFill
 
-
+                    
                 }
                 if videoItem?.video_title != nil{
                     videoTitle.numberOfLines = 1
@@ -54,7 +54,7 @@ class ShowVideosCollectionViewCell: UICollectionViewCell {
                     videoThumbnailImageView.layer.masksToBounds = true
                     videoThumbnailImageView.contentMode = .scaleToFill
 
-
+                
                 }
                 if videoItem?.video_title != nil{
                     videoTitle.numberOfLines = 1
@@ -62,27 +62,27 @@ class ShowVideosCollectionViewCell: UICollectionViewCell {
                     videoTitle.text = videoItem?.video_title
                 }
             }
-
+            
         }
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        
         setupUI()
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-
+        
         setupUI()
     }
     fileprivate  let scaleFactor: CGFloat = 1.2
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         super.didUpdateFocus(in: context, with: coordinator)
-
+        
         if context.nextFocusedView == self {
             UIView.animate(withDuration: 0.2, animations: {
-
+                
                 self.transform = CGAffineTransform(scaleX: self.scaleFactor, y: self.scaleFactor)
                 self.titleLabel.isHidden = false
                 if self.isFromCategories {
@@ -90,7 +90,7 @@ class ShowVideosCollectionViewCell: UICollectionViewCell {
                 }else {
                       self.delegate.didSelectShowVideos(passModel:self.videoItem)
                 }
-
+              
             })
         } else {
             UIView.animate(withDuration: 0.2) {
@@ -101,7 +101,7 @@ class ShowVideosCollectionViewCell: UICollectionViewCell {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-
+        
         let titleImageViewHeight = bounds.height - bounds.height / 8
         let labelHeight = bounds.height - titleImageViewHeight
         titleLabel.frame = CGRect(x: 8, y: videoThumbnailImageView.center.y - 25, width: bounds.width - 16, height:40).integral
@@ -111,19 +111,19 @@ class ShowVideosCollectionViewCell: UICollectionViewCell {
     internal func setupUI() {
         titleLabel = UILabel()
         titleLabel.isHidden = true
-
+        
     }
-
+    
     fileprivate var titleLabel: UILabel! {
         didSet {
             titleLabel.textColor = .white
             titleLabel.font = titleLabel.font.withSize(30)
             titleLabel.numberOfLines = 0
             titleLabel.lineBreakMode = .byWordWrapping
-
+            
             addSubview(titleLabel)
             titleLabel.isHidden = true
         }
     }
-
+    
 }

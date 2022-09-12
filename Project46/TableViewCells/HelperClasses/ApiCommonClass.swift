@@ -1019,57 +1019,58 @@ print("registerMobile",url)
         }
     }
 
-  static func getDianamicHomeVideos(callback: @escaping (Dictionary<String, AnyObject?>) -> Void) {
-      var channelResponse = Dictionary<String, AnyObject>()
-      var parameterDict: [String: String?] = [ : ]
-      let accesToken = UserDefaults.standard.string(forKey:"access_token")!
-      let user_id = UserDefaults.standard.string(forKey:"user_id")!
-      let country_code = UserDefaults.standard.string(forKey:"countryCode")!
-      let pubid = UserDefaults.standard.string(forKey:"pubid")!
-     let device_type = "apple-tv"
-      let dev_id = UserDefaults.standard.string(forKey:"UDID")!
-      let ipAddress = UserDefaults.standard.string(forKey:"IPAddress")!
-      let channelid = UserDefaults.standard.string(forKey:"channelid")!
-      let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"]  as! String
-      let userAgent = UserDefaults.standard.string(forKey:"userAgent")
-      let encodeduserAgent = String(format: "%@", userAgent!.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
-      if let getDianamicApi = ApiRESTUrlString().getDianamicHomeVideos(parameterDictionary: parameterDict as? Dictionary<String, String>) {
+    static func getDianamicHomeVideos(parameterDictionary: Dictionary<String, String>!, callback: @escaping(Dictionary<String, AnyObject?>) -> Void) {
+        var channelResponse = Dictionary<String, AnyObject>()
+        var parameterDict: [String: String?] = [ : ]
+        let accesToken = UserDefaults.standard.string(forKey:"access_token")!
+        let user_id = UserDefaults.standard.string(forKey:"user_id")!
+        let country_code = UserDefaults.standard.string(forKey:"countryCode")!
+        let pubid = UserDefaults.standard.string(forKey:"pubid")!
+       let device_type = "apple-tv"
+        let dev_id = UserDefaults.standard.string(forKey:"UDID")!
+        let ipAddress = UserDefaults.standard.string(forKey:"IPAddress")!
+        let channelid = UserDefaults.standard.string(forKey:"channelid")!
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"]  as! String
+        let userAgent = UserDefaults.standard.string(forKey:"userAgent")
+        let encodeduserAgent = String(format: "%@", userAgent!.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
+        if let getDianamicApi = ApiRESTUrlString().getDianamicHomeVideos(parameterDictionary: parameterDictionary) {
 
-          AF.request(getDianamicApi, method: .get, parameters: nil, headers:["access-token": accesToken,"uid":user_id,"country_code":country_code,"pubid":pubid,"device_type":device_type,"dev_id":dev_id,"ip":ipAddress,"channelid":channelid,"version":version,"ua":encodeduserAgent])
-              .responseJSON{ (response) in
-                  switch(response.result) {
-                  case .success(let value):
-                      let responseDict = value as! [String: AnyObject]
-                      var channelResponseArray = [showByCategoryModel]()
-                      var channelResponse = Dictionary<String, AnyObject>()
-                      guard let status = responseDict["success"] as? NSNumber  else {
-                          return
-                      }
-                      if status == 1 {
-                          // Create a user!
-                          let dataArray = responseDict["data"] as! [Dictionary<String, Any>]
-                          for videoItem in dataArray {
-                              let JSON: NSDictionary = videoItem as NSDictionary
-                              let videoModel: showByCategoryModel = showByCategoryModel.from(JSON)!
-                              channelResponseArray.append(videoModel)
-                          }
-                          channelResponse["data"]=channelResponseArray as AnyObject
-                      } else {
-                          channelResponse["error"]=responseDict["message"]
-                      }
-                      callback(channelResponse)
-
-                      break
-
-                  case .failure(let error):
-
-                      print(error)
-                      break
-
-                  }
-          }
-      }
-  }
+            
+            AF.request(getDianamicApi, method: .get, parameters: nil, headers:["access-token": accesToken,"uid":user_id,"country_code":country_code,"pubid":pubid,"device_type":device_type,"dev_id":dev_id,"ip":ipAddress,"channelid":channelid,"version":version,"ua":encodeduserAgent])
+                .responseJSON{ (response) in
+                    switch(response.result) {
+                    case .success(let value):
+                        let responseDict = value as! [String: AnyObject]
+                        var channelResponseArray = [showByCategoryModel]()
+                        var channelResponse = Dictionary<String, AnyObject>()
+                        guard let status = responseDict["success"] as? NSNumber  else {
+                            return
+                        }
+                        if status == 1 {
+                            // Create a user!
+                            let dataArray = responseDict["data"] as! [Dictionary<String, Any>]
+                            for videoItem in dataArray {
+                                let JSON: NSDictionary = videoItem as NSDictionary
+                                let videoModel: showByCategoryModel = showByCategoryModel.from(JSON)!
+                                channelResponseArray.append(videoModel)
+                            }
+                            channelResponse["data"]=channelResponseArray as AnyObject
+                        } else {
+                            channelResponse["error"]=responseDict["message"]
+                        }
+                        callback(channelResponse)
+                        
+                        break
+                        
+                    case .failure(let error):
+                        
+                        print(error)
+                        break
+                        
+                    }
+            }
+        }
+    }
     static func getFeaturedVideos(callback: @escaping (Dictionary<String, AnyObject?>) -> Void) {
         var channelResponse = Dictionary<String, AnyObject>()
         var parameterDict: [String: String?] = [ : ]

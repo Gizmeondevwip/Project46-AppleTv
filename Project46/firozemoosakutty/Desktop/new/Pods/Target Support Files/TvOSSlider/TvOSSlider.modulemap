@@ -1,6 +1,0 @@
-framework module TvOSSlider {
-  umbrella header "TvOSSlider-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -428,7 +428,7 @@ class VideoPlayerViewController: AVPlayerViewController,IMAAdsLoaderDelegate ,IM
         let encodedBundleIdUrl = originalBundleIdString?.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         addLink = addLink.replacingOccurrences(of: "[BUNDLE]", with: encodedBundleIdUrl!)
       } else {
-        let originalBundleIdString = "com.ios.projectfortysix"
+        let originalBundleIdString = "com.happitv.ios"
         let encodedBundleIdUrl = originalBundleIdString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         addLink = addLink.replacingOccurrences(of: "[BUNDLE]", with: encodedBundleIdUrl!)
       }
